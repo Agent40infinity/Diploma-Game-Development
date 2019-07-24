@@ -8,23 +8,21 @@ public class TowerSelector : MonoBehaviour
     public int towerIndex = 1;
 
     public void SpawnTower(Vector3 position)
-    {   
+    {
         GameObject towerPrefab = Resources.Load<GameObject>("Prefabs/Towers/Tower " + towerIndex);
         Instantiate(towerPrefab, position, Quaternion.identity);
     }
 
     void Update()
     {
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            towerIndex++;
+        }
         if (towerIndex > towerMax)
         {
             towerIndex = 1;
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                towerIndex++;
-            }
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -41,5 +39,7 @@ public class TowerSelector : MonoBehaviour
                 }
             }
         }
+
+
     }
 }

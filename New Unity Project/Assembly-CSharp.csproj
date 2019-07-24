@@ -60,7 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Enemies\Bot.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Drone.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Placeable.cs" />
+    <Compile Include="Assets\Scripts\Towers\Cannon.cs" />
+    <Compile Include="Assets\Scripts\Towers\Lightning.cs" />
+    <Compile Include="Assets\Scripts\Towers\Tower.cs" />
     <Compile Include="Assets\Scripts\TowerSelector.cs" />
     <Reference Include="Unity.ProGrids">
       <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/New Unity Project/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
