@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public float yAxis; //Used to log the Input for the yAxis (Vertical Input).
     public float speed = 5f; //Determines the speed at which the player can move.
     public bool hasShot = false; //Checks whether or not the player has Shot.
+    public Vector3 mousePosition;
+    public Vector2 direction;
+
 
     //Timers:
     public float shootTimer = 0.5f; //Cooldown timer for shooting.
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
         yAxis = Input.GetAxisRaw("Vertical"); //Sets the Input value for the yAxis.
 
         Shoot(); //Calls upon the sub-routine "Shoot".
+        Facing();
     }
 
     public void FixedUpdate()
@@ -42,10 +46,20 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Look Towards
+    public void Facing()
+    {
+        mousePosition = Input.mousePosition; //Saves the mousePosition as a variable.
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); //Changes the mousePosition to consider Screen to Worldpoint.
+        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y); 
+        transform.up = direction;
+    }
+    #endregion
+
     #region Shooting
     public void Shoot() //Used to allow the player to shoot.
     {
-        if (Input.GetKey(KeyCode.E) && shootTimer <= 0) //Checks whether or not the player is pressing the attack button and if the attack is off cooldown.
+        if (Input.GetMouseButton(0) && shootTimer <= 0) //Checks whether or not the player is pressing the attack button and if the attack is off cooldown.
         {
             shootTimer = shootTReset;
             hasShot = true;
