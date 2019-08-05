@@ -428,9 +428,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  shootTimer: 0
+  shootTReset: 0.15
+  hasShot: 0
+  direction: {x: 0, y: 0}
   rigid: {fileID: 0}
   joystickMovement: {fileID: 0}
   joystickAttack: {fileID: 0}
+  bullet: {fileID: 3023318685699940992, guid: 5c77dd52623171d4daaf1f002868bf8f, type: 3}
 --- !u!1 &932414215
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +802,7 @@ MonoBehaviour:
   handle: {fileID: 932414216}
   moveSpeed: 0
   moveThreshold: 0
-  joystickType: 0
+  joystickType: 1
   fixedPosition: {x: 0, y: 0}
 --- !u!1 &1822168755
 GameObject:
@@ -1064,7 +1069,7 @@ MonoBehaviour:
   handle: {fileID: 246828170}
   moveSpeed: 0
   moveThreshold: 0
-  joystickType: 0
+  joystickType: 1
   fixedPosition: {x: 0, y: 0}
 --- !u!114 &2132180287
 MonoBehaviour:

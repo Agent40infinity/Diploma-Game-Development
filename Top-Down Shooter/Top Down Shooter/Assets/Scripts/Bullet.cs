@@ -1,31 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
-    public float speed = 15f;
-
-    public Rigidbody2D rigid;
-
-    public void OnTriggerEnter2D(Collider2D other)
+    public class Bullet : MonoBehaviour
     {
-        if (other.tag == "Enemy")
+        public float speed = 15f;
+
+        public Rigidbody2D rigid;
+
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            //other.getComponent<Enemy>().takenDamage();
+            if (other.tag == "Enemy")
+            {
+                //other.getComponent<Enemy>().takenDamage();
+            }
+            else if (other.tag == "Wall")
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (other.tag == "Wall")
+        public void Start()
         {
-            Destroy(gameObject);
+            rigid = gameObject.GetComponent<Rigidbody2D>();
+        }
+
+        public void Update()
+        {
+            rigid.velocity = transform.up * speed;
         }
     }
-    public void Start()
-    {
-        rigid = gameObject.GetComponent<Rigidbody2D>();
-    }
-
-    public void Update()
-    {
-        rigid.velocity = transform.up * speed;
-    }
-}
