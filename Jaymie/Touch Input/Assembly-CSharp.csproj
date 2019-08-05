@@ -63,7 +63,8 @@
     <Compile Include="Assets\Scripts\InputTypes.cs" />
     <Compile Include="Assets\Scripts\Joystick.cs" />
     <Compile Include="Assets\Scripts\MasterController.cs" />
-    <Compile Include="Assets\Scripts\Object.cs" />
+    <Compile Include="Assets\Scripts\Player\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Player\Object.cs" />
     <Compile Include="Assets\Scripts\TouchInput.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Touch Input/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
