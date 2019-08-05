@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Moveable
+  - Movement
+  - Attack
   layers:
   - Default
   - TransparentFX

@@ -6,18 +6,19 @@ public class Object : MonoBehaviour
 {
     public float speed = 5f;
     public Rigidbody2D rigid;
+    public Joystick joystickMovement;
+    public Joystick joystickAttack;
 
     public void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        joystickMovement = GameObject.FindGameObjectWithTag("Movement").GetComponent<Joystick>();
+        joystickAttack = GameObject.FindGameObjectWithTag("Attack").GetComponent<Joystick>();
     }
 
     public void Update()
     {
-        //if (TouchInput.beenTouched == true)
-        //{
-        //    rigid.velocity = new Vector2(rigid.position.x, speed);
-        //    TouchInput.beenTouched = false;
-        //}
+        rigid.velocity = new Vector2(joystickMovement.Horizontal, joystickMovement.Vertical )*speed;
+        rigid.transform.Rotate(new Vector3(0,0,joystickAttack.Horizontal),Space.World);
     }
 }
