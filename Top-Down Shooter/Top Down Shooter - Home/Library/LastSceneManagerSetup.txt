@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Main.unity
+- path: Assets/Helmi Stuff xD/Scenes/Helmi Main.unity
   isLoaded: 1
   isActive: 1
