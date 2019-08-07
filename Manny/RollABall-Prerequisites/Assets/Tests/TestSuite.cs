@@ -38,6 +38,20 @@ public class TestSuite
 
     }
 
+    [UnityTest]
+    public IEnumerator ItemCollisionWithPlayer()
+    {
+        GameObject itemPrefab = Resources.Load<GameObject>("Prefabs/Entities/Item");
+        Vector3 playerPosition = player.transform.position;
+        GameObject item = Object.Instantiate(itemPrefab, playerPosition, Quaternion.identity);
+
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForEndOfFrame();
+
+        Assert.IsTrue(item == null);
+
+    }
+
     [TearDown]
     public void Teardown()
     {

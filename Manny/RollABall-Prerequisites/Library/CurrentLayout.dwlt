@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 9}
-  m_MinSize: {x: 950, y: 624}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -96,10 +96,10 @@ MonoBehaviour:
     y: 0
     width: 331
     height: 763
-  m_MinSize: {x: 232, y: 474}
-  m_MaxSize: {x: 10002, y: 14024}
+  m_MinSize: {x: 232, y: 498}
+  m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 144
+  controlID: 128
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -121,10 +121,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 815, y: 574}
-  m_MaxSize: {x: 22010, y: 18024}
+  m_MinSize: {x: 817, y: 622}
+  m_MaxSize: {x: 22012, y: 18072}
   vertical: 0
-  controlID: 45
+  controlID: 37
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,8 +144,8 @@ MonoBehaviour:
     y: 0
     width: 367
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 74}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -171,8 +171,8 @@ MonoBehaviour:
     y: 0
     width: 331
     height: 340
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 224}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -197,8 +197,8 @@ MonoBehaviour:
     y: 763
     width: 1553
     height: 184
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 124}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 24}
@@ -293,10 +293,10 @@ MonoBehaviour:
     y: 0
     width: 1553
     height: 947
-  m_MinSize: {x: 540, y: 574}
-  m_MaxSize: {x: 18010, y: 18024}
+  m_MinSize: {x: 540, y: 622}
+  m_MaxSize: {x: 18010, y: 18072}
   vertical: 1
-  controlID: 15
+  controlID: 38
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -319,10 +319,10 @@ MonoBehaviour:
     y: 0
     width: 1553
     height: 763
-  m_MinSize: {x: 540, y: 474}
-  m_MaxSize: {x: 18010, y: 14024}
+  m_MinSize: {x: 540, y: 498}
+  m_MaxSize: {x: 18010, y: 14048}
   vertical: 0
-  controlID: 16
+  controlID: 39
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -384,7 +384,7 @@ MonoBehaviour:
       name: RollABall
       fullName: RollABall
       resultStatus: 1
-      duration: 0.1824206
+      duration: 0.3566623
       messages: 
       output: 
       stacktrace: 
@@ -394,11 +394,11 @@ MonoBehaviour:
       isSuite: 1
       categories: []
       parentID: 
-    - id: '[C:/Users/Aiden.Nathan1/Downloads/RollABall-Prerequisites/Library/ScriptAssemblies/TestCode.dll][suite]'
+    - id: '[C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Manny/RollABall-Prerequisites/Library/ScriptAssemblies/TestCode.dll][suite]'
       name: TestCode.dll
-      fullName: C:/Users/Aiden.Nathan1/Downloads/RollABall-Prerequisites/Library/ScriptAssemblies/TestCode.dll
+      fullName: C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Manny/RollABall-Prerequisites/Library/ScriptAssemblies/TestCode.dll
       resultStatus: 1
-      duration: 0.1508803
+      duration: 0.3281981
       messages: 
       output: 
       stacktrace: 
@@ -412,7 +412,7 @@ MonoBehaviour:
       name: TestSuite
       fullName: TestSuite
       resultStatus: 1
-      duration: 0.1355997
+      duration: 0.3123432
       messages: 
       output: 
       stacktrace: 
@@ -426,7 +426,22 @@ MonoBehaviour:
       name: GamePrefabLoaded
       fullName: TestSuite.GamePrefabLoaded
       resultStatus: 1
-      duration: 0.1091631
+      duration: 0.1073131
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentID: '[TestCode][TestSuite][suite]'
+    - id: '[TestCode][TestSuite.ItemCollisionWithPlayer]'
+      name: ItemCollisionWithPlayer
+      fullName: TestSuite.ItemCollisionWithPlayer
+      resultStatus: 1
+      duration: 0.0955755
       messages: 
       output: 
       stacktrace: 
@@ -440,8 +455,8 @@ MonoBehaviour:
     - id: '[TestCode][TestSuite.PlayerExists]'
       name: PlayerExists
       fullName: TestSuite.PlayerExists
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.0815763
       messages: 
       output: 
       stacktrace: 
@@ -452,13 +467,13 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentID: '[TestCode][TestSuite][suite]'
-    m_ResultText: GamePrefabLoaded (0.109s)
+    m_ResultText: ItemCollisionWithPlayer (0.096s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 22c29dba
-      m_LastClickedID: -1164066270
-      m_ExpandedIDs: eb0abd9d254bbfdeb10ffbf6ffffff7f
+      m_SelectedIDs: f7c448fd
+      m_LastClickedID: -45562633
+      m_ExpandedIDs: eb0abd9d502db7bb254bbfdeb10ffbf6ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -699,14 +714,14 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Aiden.Nathan1\Downloads\RollABall-Prerequisites
+  m_LastProjectPath: C:\Users\Aiden.Nathan1\Documents\GitHub\Diploma-Game-Development\Manny\RollABall-Prerequisites
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 74310000
     m_LastClickedID: 12660
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000d0090000ea0a0000840b0000ce0b0000b20c00005e0d0000482b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -734,7 +749,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff3a340000f8340000aa35000054360000ce360000c63700007c3b0000
+    m_ExpandedIDs: ffffffff00000000d0090000ea0a0000840b0000ce0b0000b20c00005e0d0000482b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -855,7 +870,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 88d2ffffa8d2ffffb4d3fffffee7ffff00e8ffff20e8ffffdae8ffff
+      m_ExpandedIDs: b2edffffd2edffffe0efffff0cf1ffff2cf1ffff2cf3ffff76f5ffff96f5ffff98f7ffffd2fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
