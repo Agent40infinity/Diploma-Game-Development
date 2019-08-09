@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     public Vector3 mousePosition;
     public Vector2 direction;
 
-
     //Timers:
     public float shootTimer = 0.5f; //Cooldown timer for shooting.
     public float shootTReset = 0.5f; //value used to reset the shooting cooldown.
@@ -22,13 +21,30 @@ public class Player : MonoBehaviour
     //References:
     public Rigidbody2D rigid; //References the RigidBody.
     public GameObject bullet; //References the Prefab for the bullet GameObject.
+    public Joystick joystickMovement; //References the joystick for Movement.
+    public Joystick joystickAttack; //References the joystick for Attack.
+
+    public bool joystickNotZero()
+    {
+        if (joystickAttack.Horizontal != 0f || joystickAttack.Vertical != 0f) //Checks whether or not the joystick has been let go of.
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     #endregion
 
     #region General
     public void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>(); //Used to obtain the attached GameObject's RigidBody.
+        joystickMovement = GameObject.FindGameObjectWithTag("Movement").GetComponent<Joystick>(); //Used to obtain the joystick based on the tag "Movement".
+        joystickAttack = GameObject.FindGameObjectWithTag("Attack").GetComponent<Joystick>(); //Used to obtain the joystick based on the tag "Attack".
         shootTimer = shootTReset; //Gateway reset to make sure everything is correct.
+
     }
 
     public void Update()
@@ -37,29 +53,32 @@ public class Player : MonoBehaviour
         yAxis = Input.GetAxisRaw("Vertical"); //Sets the Input value for the yAxis.
 
         Shoot(); //Calls upon the sub-routine "Shoot".
-        Facing();
+        Facing(); //Calls upon the sub-routine "Facing".
     }
 
     public void FixedUpdate()
     {
-        rigid.velocity = new Vector2(xAxis * speed, yAxis * speed); //Automatic Input for the Player's movement.
+        rigid.velocity = new Vector2(joystickMovement.Horizontal, joystickMovement.Vertical) * speed; //Automatic Input for the Player's movement.
     }
     #endregion
 
     #region Look Towards
     public void Facing()
     {
-        mousePosition = Input.mousePosition; //Saves the mousePosition as a variable.
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); //Changes the mousePosition to consider Screen to Worldpoint.
-        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y); 
-        transform.up = direction;
+        //mousePosition = Input.mousePosition; //Saves the mousePosition as a variable.
+        //mousePosition = Camera.main.ScreenToWorldPoint(mousePosition); //Changes the mousePosition to consider Screen to Worldpoint.
+        if (joystickNotZero() == true) //Calls upon the variable.
+        {
+            direction = new Vector2(joystickAttack.Horizontal, joystickAttack.Vertical); //Sets the direction the player is facing if the joystick is being moved.
+            transform.up = direction;
+        }
     }
     #endregion
 
     #region Shooting
     public void Shoot() //Used to allow the player to shoot.
     {
-        if (Input.GetMouseButton(0) && shootTimer <= 0) //Checks whether or not the player is pressing the attack button and if the attack is off cooldown.
+        if (joystickNotZero() && shootTimer <= 0) //Checks whether or not the player is pressing the attack button and if the attack is off cooldown.
         {
             shootTimer = shootTReset;
             hasShot = true;

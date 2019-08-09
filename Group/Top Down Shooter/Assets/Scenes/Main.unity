@@ -148,7 +148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -76}
+  m_AnchoredPosition: {x: -128, y: -221}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25561001
@@ -220,8 +220,8 @@ GameObject:
   - component: {fileID: 256206165}
   - component: {fileID: 256206164}
   m_Layer: 5
-  m_Name: Joystick_Right
-  m_TagString: Untagged
+  m_Name: Joystick_Left
+  m_TagString: Movement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   background: {fileID: 25561000}
   handle: {fileID: 1302802672}
   moveThreshold: 1
-  joystickType: 0
+  joystickType: 1
 --- !u!114 &256206165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 14}
+  m_AnchoredPosition: {x: 127, y: -219}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031533202
@@ -523,6 +523,8 @@ MonoBehaviour:
   shootTReset: 0.5
   rigid: {fileID: 0}
   bullet: {fileID: 7389491342424807127, guid: 35980eec4d9e7464f8cb881d30691c00, type: 3}
+  joystickMovement: {fileID: 0}
+  joystickAttack: {fileID: 0}
 --- !u!212 &1031868154
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1027,8 +1029,8 @@ GameObject:
   - component: {fileID: 1957848757}
   - component: {fileID: 1957848756}
   m_Layer: 5
-  m_Name: Joystick_Left
-  m_TagString: Untagged
+  m_Name: Joystick_Right
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1073,7 +1075,7 @@ MonoBehaviour:
   background: {fileID: 1031533201}
   handle: {fileID: 1992392015}
   moveThreshold: 1
-  joystickType: 0
+  joystickType: 1
 --- !u!114 &1957848757
 MonoBehaviour:
   m_ObjectHideFlags: 0
