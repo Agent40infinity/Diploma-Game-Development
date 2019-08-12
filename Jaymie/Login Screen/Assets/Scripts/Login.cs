@@ -49,6 +49,6 @@ public class Login : MonoBehaviour
 
     public void LoginUser()
     {
-        StartCoroutine(UserLogin(usernameInput.text, passwordInput.text));
+        StartCoroutine(UserLogin(usernameInputLogin.text, passwordInputLogin.text));
     }
 }

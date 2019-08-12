@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 370358292}
   - component: {fileID: 370358291}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_CreateAccount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
