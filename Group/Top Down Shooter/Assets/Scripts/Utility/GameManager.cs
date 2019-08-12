@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject Wall;
-    public int tileWidth = 16;
-    public int tileHeight = 9;
+    public int tileWidth = 32;
+    public int tileHeight = 18;
     public int[,] tilesetPreset1 =
         {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
