@@ -4,83 +4,44 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Wall;
-    public int tileWidth = 32;
-    public int tileHeight = 18;
-    public int[,] tilesetPreset1 =
-        {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    };
-    public int[,] tilesetPreset2 =
-        {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    };
-    public int[,] tilesetPreset3 =
-        {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,1,1,1,1,0,0,0,0,1,1,1,1,0,1},
-        {1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1},
-        {1,0,1,1,1,1,0,0,0,0,1,1,1,1,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    };
+    //General:
+    public float xOffset;
+    public float yOffset;
+
+    //Reference:
+    public GameObject player;
+    public GameObject spawnRoom;
+    public GameObject[] roomPresets;
+    public GameObject curRoom;
 
     public void Start()
     {
-        Wall = Resources.Load<GameObject>("Prefabs/Wall");
-        Tilesets();
+        player = GameObject.Find("Player");
+        spawnRoom = GameObject.Find("Spawn");
+        for (int i = 0; i < roomPresets.Length; i++)
+        {
+            roomPresets[i] = Resources.Load<GameObject>("Prefabs/Towers/Preset " + i);
+        }
     }
 
-    public void Tilesets()
+    public void Update()
     {
-        for (int y = 0; y < tileHeight; y++) //Checks the  Y position and value within the array to set it's content.
+        if (curRoom.GetComponent<Room>().beenVisited != true)
         {
-            for (int x = 0; x < tileWidth; x++) //Checks the  X position and value within the array to set it's content.
-            {  
-                switch (tilesetPreset1[y, x]) //Generation for Tileset PReset 1
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Instantiate(Wall, new Vector3(x, y, 0), transform.rotation);
-                        break;
-                }
-                switch (tilesetPreset2[y, x]) //Generation for Tileset PReset 2
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Instantiate(Wall, new Vector3(x, y, 0), transform.rotation);
-                        break;
-                }
-                switch (tilesetPreset3[y, x]) //Generation for Tileset Preset 3
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Instantiate(Wall, new Vector3(x, y, 0), transform.rotation);
-                        break;
-                }
+            for (int i = 0; i < curRoom.GetComponent<Room>().doors.Length; i++)
+            {
+                if (curRoom.GetComponent<Room>().doors[0])
+                { xOffset = 0f; yOffset = -20f; }
+                else if (curRoom.GetComponent<Room>().doors[1])
+                { xOffset = -20f; yOffset = 0f; }
+                else if (curRoom.GetComponent<Room>().doors[2])
+                { xOffset = 0f; yOffset = 20f; }
+                else if (curRoom.GetComponent<Room>().doors[3])
+                { xOffset = 20f; yOffset = 0; }
+
+                Instantiate(roomPresets[Random.Range(0, 4)], new Vector2(curRoom.transform.position.x + xOffset, curRoom.transform.position.y + yOffset), Quaternion.identity);
             }
+            
         }
     }
 }
