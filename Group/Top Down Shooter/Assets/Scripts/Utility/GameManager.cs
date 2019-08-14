@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+
+
         if (curRoom.GetComponent<Room>().beenVisited != true)
         {
             for (int i = 0; i < curRoom.GetComponent<Room>().doors.Length; i++)

@@ -15,11 +15,12 @@ public class Room : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             beenVisited = true;
+            GetComponent<GameManager>().curRoom = gameObject;
         }
     }
 }
