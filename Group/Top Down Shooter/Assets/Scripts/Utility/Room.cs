@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public bool beenVisited = false;
+    public int beenVisited = 0;
     public Transform[] doors;
 
     public void Start()
@@ -19,8 +19,9 @@ public class Room : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            beenVisited = true;
+            beenVisited = 1;
             GetComponent<GameManager>().curRoom = gameObject;
+            Debug.Log(GetComponent<GameManager>().curRoom);
         }
     }
 }

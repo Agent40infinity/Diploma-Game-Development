@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
         spawnRoom = GameObject.Find("Spawn");
         for (int i = 0; i < roomPresets.Length; i++)
         {
-            roomPresets[i] = Resources.Load<GameObject>("Prefabs/Towers/Preset " + i);
+            roomPresets[i] = Resources.Load<GameObject>("Prefabs/Presets/Preset " + (i + 1));
+            Debug.Log(roomPresets[i]);
         }
     }
 
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
 
 
-        if (curRoom.GetComponent<Room>().beenVisited != true)
+        if (curRoom.GetComponent<Room>().beenVisited == 1)
         {
             for (int i = 0; i < curRoom.GetComponent<Room>().doors.Length; i++)
             {
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
                 { xOffset = 20f; yOffset = 0; }
 
                 Instantiate(roomPresets[Random.Range(0, 4)], new Vector2(curRoom.transform.position.x + xOffset, curRoom.transform.position.y + yOffset), Quaternion.identity);
+                curRoom.GetComponent<Room>().beenVisited = 2;
             }
             
         }
