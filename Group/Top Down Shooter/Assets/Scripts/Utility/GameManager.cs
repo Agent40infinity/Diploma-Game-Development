@@ -40,12 +40,15 @@ public class GameManager : MonoBehaviour
                 else if (curRoom.GetComponent<Room>().doors[2].GetComponent<Door>().hasChecked == false)
                 { xOffset = 0f; yOffset = 18f; }
                 else if (curRoom.GetComponent<Room>().doors[3].GetComponent<Door>().hasChecked == false)
-                { xOffset = 32f; yOffset = 0; }       
+                { xOffset = 32f; yOffset = 0; }
 
-                random = Random.Range(0, 4);
-                Instantiate(roomPresets[random], new Vector2(curRoom.transform.position.x + xOffset, curRoom.transform.position.y + yOffset), Quaternion.identity);
-                curRoom.GetComponent<Room>().doors[i].GetComponent<Door>().hasChecked = true;
-                Debug.Log(random);
+                if (curRoom.GetComponent<Room>().doors[i].GetComponent<Door>().hasChecked == false)
+                {
+                    random = Random.Range(0, 4);
+                    Instantiate(roomPresets[random], new Vector2(curRoom.transform.position.x + xOffset, curRoom.transform.position.y + yOffset), Quaternion.identity);
+                    curRoom.GetComponent<Room>().doors[i].GetComponent<Door>().hasChecked = true;
+                    Debug.Log(random);
+                }
             }
             curRoom.GetComponent<Room>().beenVisited = 2;
         }

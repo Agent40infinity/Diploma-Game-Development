@@ -19,9 +19,12 @@ public class Room : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Player" && beenVisited < 2)
+        if (other.tag == "Player")
         {
-            beenVisited = 1;
+            if (beenVisited < 2)
+            {
+                beenVisited = 1;
+            }
             GameObject.Find("GameManager").GetComponent<GameManager>().curRoom = gameObject;
         }
     }
