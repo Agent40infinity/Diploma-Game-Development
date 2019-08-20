@@ -33,17 +33,18 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < curRoom.GetComponent<Room>().doors.Length; i++)
             {
-                if (curRoom.GetComponent<Room>().doors[0])
-                { xOffset = 0f; yOffset = -16.5f; }
-                else if (curRoom.GetComponent<Room>().doors[1])
-                { xOffset = -16.5f; yOffset = 0f; }
-                else if (curRoom.GetComponent<Room>().doors[2])
-                { xOffset = 0f; yOffset = 16.5f; }
-                else if (curRoom.GetComponent<Room>().doors[3])
-                { xOffset = 16.5f; yOffset = 0; }
+                if (curRoom.GetComponent<Room>().doors[0].GetComponent<Door>().hasChecked == false)
+                { xOffset = 0f; yOffset = -18f; }
+                else if (curRoom.GetComponent<Room>().doors[1].GetComponent<Door>().hasChecked == false)
+                { xOffset = -32f; yOffset = 0f; }
+                else if (curRoom.GetComponent<Room>().doors[2].GetComponent<Door>().hasChecked == false)
+                { xOffset = 0f; yOffset = 18f; }
+                else if (curRoom.GetComponent<Room>().doors[3].GetComponent<Door>().hasChecked == false)
+                { xOffset = 32f; yOffset = 0; }       
 
-                random = Random.Range(-1, 4);
+                random = Random.Range(0, 4);
                 Instantiate(roomPresets[random], new Vector2(curRoom.transform.position.x + xOffset, curRoom.transform.position.y + yOffset), Quaternion.identity);
+                curRoom.GetComponent<Room>().doors[i].GetComponent<Door>().hasChecked = true;
                 Debug.Log(random);
             }
             curRoom.GetComponent<Room>().beenVisited = 2;
