@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 2272230160132178355}
   - component: {fileID: 2272230160132178354}
   - component: {fileID: 6678270553690024688}
+  - component: {fileID: 1888573368422487464}
   - component: {fileID: 2261898388424685261}
   m_Layer: 0
   m_Name: Witch
@@ -207,6 +208,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   enemyGFX: {fileID: 0}
+  speed: 3
+--- !u!114 &1888573368422487464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272230160132178359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a1b50f3cc5759429c83434545c1ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  enemyType: 0
+  isDead: 0
+  enemy: {fileID: 0}
 --- !u!58 &2261898388424685261
 CircleCollider2D:
   m_ObjectHideFlags: 0

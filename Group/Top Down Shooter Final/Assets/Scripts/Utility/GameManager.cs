@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class GameManager : MonoBehaviour
     public float yOffset;
     public int random;
 
+    public int currentScore;
+    public int highscore;
+
     //Reference:
     public GameObject player;
     public GameObject spawnRoom;
     public GameObject[] roomPresets;
     public GameObject curRoom;
+
+    public Text score;
 
     public void Start()
     {
@@ -25,6 +31,8 @@ public class GameManager : MonoBehaviour
             roomPresets[i] = Resources.Load<GameObject>("Prefabs/Presets/Preset " + (i + 1));
             Debug.Log(roomPresets[i]);
         }
+
+        score = GameObject.Find("Score").GetComponent<Text>();
     }
 
     public void Update()
@@ -52,5 +60,15 @@ public class GameManager : MonoBehaviour
             }
             curRoom.GetComponent<Room>().beenVisited = 2;
         }
+
+        
     }
+
+    #region Point System
+    public void addScore(int points)
+    {
+        currentScore += points;
+        score.text = "Score: " + currentScore;
+    }
+    #endregion
 }

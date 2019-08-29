@@ -11,6 +11,7 @@ TagManager:
   - Door
   - Witch
   - Room
+  - Shield Zombie
   layers:
   - Default
   - TransparentFX

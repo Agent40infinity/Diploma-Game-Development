@@ -10,9 +10,10 @@
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.tag == "Enemy")
+            if (other.tag == "Witch" || other.tag == "Zombie" || other.tag == "Shield Zombie")
             {
-                //other.getComponent<Enemy>().takenDamage();
+                other.GetComponent<EnemyHealth>().TakenDamage();
+                Destroy(gameObject);
             }
             else if (other.tag == "Wall")
             {

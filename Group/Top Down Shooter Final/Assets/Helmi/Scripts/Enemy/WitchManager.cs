@@ -110,11 +110,9 @@ public class WitchManager : MonoBehaviour
     IEnumerator WhichRoom(GameObject room)
     {
         roomWitch = room.GetComponent<RoomWitches>();
-        
-        if (room == initialRoom)
-        {
-        }
 
+        if (room == initialRoom)
+        { }
         else
         {
             witchesInTheRoom = roomWitch.witches;
