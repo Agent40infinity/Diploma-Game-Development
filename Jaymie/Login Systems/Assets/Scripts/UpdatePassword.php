@@ -13,14 +13,13 @@
     {
         die("Connection Failed.".mysqli_connect_error());
     }
-    
+
     $salt = "\$5\$round=5000\$"."supercalifragilisticexpialidocious".$username."\$";
-    $hash = crypt($password, $salt);
-    $updatePassword = "UPDATE user SET salt = '".$salt."', hash = '".$hash."' WHERE username = '".$username."'";
+    $hash = crypt($password, $salt);  
+    $updatePassword = "UPDATE users SET salt = '".$salt."', hash = '".$hash."' WHERE username = '".$username."'";
     $updateResult = mysqli_query($conn, $updatePassword)or die("error insert failed");
     if($updateResult)
     {
         echo "Password Changed";
-    }
-        
+    }      
 ?>

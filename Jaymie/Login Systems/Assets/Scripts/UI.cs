@@ -5,7 +5,7 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     public GameObject main, create, forget;
-    public GameObject forgotMain, forgotCode;
+    public GameObject forgotMain, forgotCode, forgotNewPassword;
 
     public void ForgotPassword()
     {
@@ -38,5 +38,11 @@ public class UI : MonoBehaviour
             forgotMain.SetActive(true);
             forgotCode.SetActive(false);
         }
+    }
+
+    public void NewPasswordBack()
+    {
+        forgotCode.SetActive(true);
+        forgotNewPassword.SetActive(false);
     }
 }

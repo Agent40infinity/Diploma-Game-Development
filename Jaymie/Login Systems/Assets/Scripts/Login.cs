@@ -25,7 +25,9 @@ public class Login : MonoBehaviour
     //Forgot Password:
     public InputField emailInputForgot;
     public GameObject forgotContent;
+    public GameObject checkCode;
     public GameObject newPassword;
+    public InputField codeInputForgot;
 
     //Notification:
     public Text notification;
@@ -34,7 +36,8 @@ public class Login : MonoBehaviour
     //Code Management:
     private string characters = "0123456789abcdefghijklmnopqrstuvwxABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private string code = "";
-    public string savedCode = "";
+    private string savedCode = "temp";
+    public string _username;
     #endregion
 
     #region Create User
@@ -101,7 +104,8 @@ public class Login : MonoBehaviour
         }
         else
         {
-            SendEmail(email, webRequest.downloadHandler.text);
+            _username = webRequest.downloadHandler.text;
+            SendEmail(email);
         }
     }
 
@@ -112,7 +116,7 @@ public class Login : MonoBehaviour
     #endregion
 
     #region Send Email
-    void SendEmail(string _email, string _username)
+    void SendEmail(string _email)
     {
         CreateCode();
         MailMessage mail = new MailMessage();
@@ -152,27 +156,55 @@ public class Login : MonoBehaviour
     #region Reset Password
     public IEnumerator CheckCode(string _code)
     {
+        _code = codeInputForgot.text;
         if (savedCode == _code)
         {
             newPassword.SetActive(true);
-            forgotContent.SetActive(false);
+            checkCode.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine("Notification");
+            notification.text = "Incorrect Code";
         }
         yield return null;
     }
 
     public void SubmitCodeForReset()
     {
-        StartCoroutine(CheckCode(null));
+        StartCoroutine(CheckCode(codeInputForgot.text));
     }
 
-    public IEnumerator PasswordReset(string email, string username, string newPassword)
+    public IEnumerator PasswordReset(string newPassword, string confirmPassword)
     {
+        if (newPassword == confirmPassword)
+        {
+            string passwordResetURL = "http://localhost/nsirpg/UpdatePassword.php";
+            WWWForm form = new WWWForm();
+            form.AddField("password_Post", newPassword);
+            form.AddField("username_Post", _username);
+
+            UnityWebRequest webRequest = UnityWebRequest.Post(passwordResetURL, form);
+            yield return webRequest.SendWebRequest();
+            Debug.Log(webRequest.downloadHandler.text);
+            //if (webRequest.downloadHandler.text == "User Not Found")
+            //{
+            //    StartCoroutine("Notification");
+            //    notification.text = webRequest.downloadHandler.text;
+            //}
+         
+        }
+        else
+        {
+            StartCoroutine("Notification");
+            notification.text = "Passwords do not Match";
+        }
         yield return null;
     }
 
     public void SubmitPasswordReset()
     {
-        StartCoroutine(PasswordReset(null, null, null));
+        StartCoroutine(PasswordReset(null, null));
     }
     #endregion
 
