@@ -20,6 +20,11 @@ public class Login : MonoBehaviour
     public InputField usernameInputLogin;
     public InputField passwordInputLogin;
 
+    public InputField emailInputForgot;
+
+    public Text notification;
+    public GameObject notificationParent;
+
     private string characters = "0123456789abcdefghijklmnopqrstuvwxABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private string code = "";
     #endregion
@@ -35,6 +40,8 @@ public class Login : MonoBehaviour
         UnityWebRequest webRequest = UnityWebRequest.Post(createUserURL, form);
         yield return webRequest.SendWebRequest();
         Debug.Log(webRequest);
+        StartCoroutine("Notification");
+        notification.text = "Account Created";
     }
 
     public void CreateNewUser()
@@ -57,12 +64,42 @@ public class Login : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
-        else { }
+        else
+        {
+            StartCoroutine("Notification");
+            notification.text = webRequest.downloadHandler.text;
+        }
     }
 
     public void LoginUser()
     {
         StartCoroutine(UserLogin(usernameInputLogin.text, passwordInputLogin.text));
+    }
+    #endregion
+
+    #region forgot User
+    IEnumerator ForgotUser(string email)
+    {
+        string forgotURL = "http://localhost/nsirpg/checkemail.php";
+        WWWForm form = new WWWForm();
+        form.AddField("email_Post", email);
+        UnityWebRequest webRequest = UnityWebRequest.Post(forgotURL, form);
+        yield return webRequest.SendWebRequest();
+        Debug.Log(webRequest.downloadHandler.text);
+        if (webRequest.downloadHandler.text == "User Not Found")
+        {
+            StartCoroutine("Notification");
+            notification.text = webRequest.downloadHandler.text;
+        }
+        else
+        {
+            SendEmail(email, webRequest.downloadHandler.text);
+        }
+    }
+
+    public void SubmitForgotUser()
+    {
+        StartCoroutine(ForgotUser(emailInputForgot.text));
     }
     #endregion
 
@@ -88,6 +125,8 @@ public class Login : MonoBehaviour
         //send message
         smtpServer.Send(mail);
         Debug.Log("Sending Email");
+        StartCoroutine("Notification");
+        notification.text = "Email Sent";
     }
 
     void CreateCode()
@@ -97,33 +136,28 @@ public class Login : MonoBehaviour
             int a = UnityEngine.Random.Range(0, characters.Length);
             code = code + characters[a];
         }
-
         Debug.Log(code);
     }
     #endregion
 
-    //#region forgot User
-    //public void SubmitLogin()
-    //{
-    //    StartCoroutine(UserLogin(username, password));
-    //}
+    #region Reset Password
+    public IEnumerator PasswordReset(string email, string username, string newPassword)
+    {
+        yield return null;
+    }
 
-    //IEnumerator ForgotUser(string email)
-    //{
-    //    string forgotURL = "http://localhost/nsirpg/checkemail.php";
-    //    WWWForm form = new WWWForm();
-    //    form.AddField("email_Post", email);
-    //    UnityWebRequest webRequest = UnityWebRequest.Post(forgotURL, form);
-    //    yield return webRequest.SendWebRequest();
-    //    Debug.Log(webRequest.downloadHandler.text);
-    //    if (webRequest.downloadHandler.text == "User Not Found")
-    //    {
-    //        createAccToolTip = webRequest.downloadHandler.text;
-    //    }
-    //    else
-    //    {
-    //        SendEmail(email, username);
-    //    }
-    //}
-    //#endregion
+    public void SubmitPasswordReset()
+    {
+        StartCoroutine(PasswordReset(null, null, null));
+    }
+    #endregion
+
+    #region Notification
+    public IEnumerator Notification()
+    {
+        notificationParent.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        notificationParent.SetActive(false);
+    }
+    #endregion
 }
