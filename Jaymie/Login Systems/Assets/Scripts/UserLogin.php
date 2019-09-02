@@ -32,6 +32,7 @@
 	$loginhash = crypt($password, $salt);
 	if ($hash != $loginhash)
 	{
+		// Spelling ma dude spelling xD
 		echo "Incorrect Pasword";
 		exit();
 	}

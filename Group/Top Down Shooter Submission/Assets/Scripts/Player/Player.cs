@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
     {
 
         rigid.velocity = new Vector2(xAxis, yAxis) * speed;
-        rigid.velocity = new Vector2(joystickMovement.Horizontal, joystickMovement.Vertical) * speed; //Automatic Input for the Player's movement.
+        //rigid.velocity = new Vector2(joystickMovement.Horizontal, joystickMovement.Vertical) * speed; //Automatic Input for the Player's movement.
     }
     #endregion
 

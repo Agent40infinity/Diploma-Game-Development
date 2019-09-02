@@ -13,20 +13,28 @@ using System.Security.Cryptography.X509Certificates;
 public class Login : MonoBehaviour
 {
     #region Variables
+    //Create New User:
     public InputField usernameInput;
     public InputField emailInput;
     public InputField passwordInput;
 
+    //Login:
     public InputField usernameInputLogin;
     public InputField passwordInputLogin;
 
+    //Forgot Password:
     public InputField emailInputForgot;
+    public GameObject forgotContent;
+    public GameObject newPassword;
 
+    //Notification:
     public Text notification;
     public GameObject notificationParent;
 
+    //Code Management:
     private string characters = "0123456789abcdefghijklmnopqrstuvwxABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private string code = "";
+    public string savedCode = "";
     #endregion
 
     #region Create User
@@ -135,12 +143,28 @@ public class Login : MonoBehaviour
         {
             int a = UnityEngine.Random.Range(0, characters.Length);
             code = code + characters[a];
+            savedCode = code;
         }
         Debug.Log(code);
     }
     #endregion
 
     #region Reset Password
+    public IEnumerator CheckCode(string _code)
+    {
+        if (savedCode == _code)
+        {
+            newPassword.SetActive(true);
+            forgotContent.SetActive(false);
+        }
+        yield return null;
+    }
+
+    public void SubmitCodeForReset()
+    {
+        StartCoroutine(CheckCode(null));
+    }
+
     public IEnumerator PasswordReset(string email, string username, string newPassword)
     {
         yield return null;

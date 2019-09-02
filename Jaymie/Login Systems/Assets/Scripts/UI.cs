@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    public GameObject Main, Create, Forget;
+    public GameObject main, create, forget;
+    public GameObject forgotMain, forgotCode;
 
     public void ForgotPassword()
     {
-        Main.SetActive(false);
-        Forget.SetActive(true);
+        main.SetActive(false);
+        forget.SetActive(true);
     }
 
     public void CreateAccount()
     {
-        Main.SetActive(false);
-        Create.SetActive(true);
+        main.SetActive(false);
+        create.SetActive(true);
     }
 
     public void Back()
     {
-        Create.SetActive(false);
-        Forget.SetActive(false);
-        Main.SetActive(true);
+        create.SetActive(false);
+        forget.SetActive(false);
+        main.SetActive(true);
+    }
+
+    public void EnterCode(bool isMain)
+    {
+        if (isMain)
+        {
+            forgotMain.SetActive(false);
+            forgotCode.SetActive(true);
+        }
+        else
+        {
+            forgotMain.SetActive(true);
+            forgotCode.SetActive(false);
+        }
     }
 }
