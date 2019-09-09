@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 111
+  controlID: 28
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 622}
   m_MaxSize: {x: 18008, y: 18072}
   vertical: 0
-  controlID: 14
+  controlID: 85
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 622}
   m_MaxSize: {x: 14006, y: 18072}
   vertical: 1
-  controlID: 15
+  controlID: 86
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 498}
   m_MaxSize: {x: 14006, y: 14048}
   vertical: 0
-  controlID: 16
+  controlID: 87
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -18336
+  m_LastSelectedObjectID: 15388
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -513,7 +513,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Seven Swords/Swords/Prefabs with Colliders
+    - Assets/Fantasy Monster(wizard) Demo/Textures
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -526,7 +526,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 74310000
     m_LastClickedID: 12660
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000163900002a390000303900006639000070390000883900008e390000d6390000063a00000c3a00007a3a0000863a0000ba3a0000c03a0000183b00001e3b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -554,21 +554,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 746}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000082e0000ee4a0000f04a0000f84a0000fa4a0000fe4a0000004b0000024b0000044b0000064b0000084b0000124b0000144b0000f06500002866000040660000
+    m_ExpandedIDs: ffffffff00000000163900002a390000303900006639000070390000883900008e390000d6390000063a00000c3a00007a3a0000863a0000ba3a0000c03a0000183b00001e3b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Katana w_ Colliders
-      m_OriginalName: Katana w_ Colliders
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 26146
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 2}
     m_SearchString: 
@@ -672,10 +672,10 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: dc8cffff
-      m_LastClickedID: -29476
-      m_ExpandedIDs: dc9cffff8c9effffe2a3ffff54b7ffff5ab7ffff62b7ffff64b7ffff68b7ffff6cb7ffff6eb7ffff70b7ffff84b7ffff04b8ffff3ab8ffff56b8ffff60b8ffff70b8ffff30ccffffe6ddffffdef0ffff
+      scrollPos: {x: 0, y: 322}
+      m_SelectedIDs: 603b0000
+      m_LastClickedID: 15200
+      m_ExpandedIDs: 76e4ffff7c3b0000903b0000943b00009a3b00009c3b0000ba3b0000c03b0000ce3b0000d03b0000da3b0000e23b0000e63b0000f63b0000fe3b0000023c0000183c00001c3c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -730,9 +730,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.993691, y: 5.227321, z: 2.673761}
+    m_Target: {x: -2.7606285, y: 5.3146224, z: 2.5978503}
     speed: 2
-    m_Value: {x: -2.993691, y: 5.227321, z: 2.673761}
+    m_Value: {x: -2.7606285, y: 5.3146224, z: 2.5978503}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -764,9 +764,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.0100868605, y: -0.98861384, z: 0.077578366, w: 0.12853989}
   m_Size:
-    m_Target: 4.449772
+    m_Target: 6.249773
     speed: 2
-    m_Value: 4.449772
+    m_Value: 6.249773
   m_Ortho:
     m_Target: 0
     speed: 2
