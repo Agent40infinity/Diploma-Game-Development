@@ -1,0 +1,62 @@
+﻿Shader "Lesson/Normal Albedo Colour Tint" //This section allows for easy sorting of our shader in the shader menu.
+{
+	Properties //These are the public properties seen on a material.
+	{
+		_Texture("Texture", 2D) = "black"{} //Variable name is _Texture, Display name is Texture. This is 2D and the default untextured colour is black.
+		_NormalMap("Normal", 2D) = "bump"{} //Uses RGB colour value to create xyz depth to the material. Bump tells unity this material needs to be marked as a normal map so that it can be used correctly.
+		_Colour("Tint", Color) = (0,0,0,0) //RGBA Red Green Blue Alpha.
+		_FogColour ("FogColour", color) = (0,0,0,0) //RGBA Red Green Blue Alpha for Fog Colour.
+	}
+
+	SubShader //There can be multiple SubShaders running at the same time as they are using different GPU levels on different platforms.
+	{
+		Tags //Tags are basically key-value pairs. Inside a SubShader, tags are used to determine rendering order and other parameters of a SubShader.
+		{
+			"RenderType" = "Opaque"  //RenderType tag categorizes shaders into serveral pre-defined groups.
+		}
+
+		CGPROGRAM //This is the start of our C for Graphics Language.
+			#pragma surface MainColour Lambert finalcolor:FogColour vertex:Vert//The surface of our models is affected by the mainColour Function. The material type is Lambert. Lambert is a flat material that has no highlights.
+			sampler2D _Texture; //This connects our _Texture variable that is in the properties section to our 2D _Texture variable in CG.
+			sampler2D _NormalMap; //connects our _NormalMap variable from properties to the _NormalMap variable in CG.
+			fixed4 _Colour; //Reference to the input _Colour in the Properties section. fixed3 is 4 small decimals thta allow us to store RGMA.
+			fixed4 _FogColour; //Reference to the input_fog	 in the Properties section.
+			/*
+				High Precision: float = 32 bits.
+				Medium Precision: float = 16 bits.
+				Low Precision: float = 11 bits.
+			*/
+
+			struct Input
+			{
+				float2 uv_Texture; //This is in refernce to our UV of our model. UV maps are wrapping of a model. UV denotes the axes of the 2D texture.
+				float2 uv_NormalMap; //UV map link to the _NormalMap image.
+				half fog; 
+			};
+
+			void Vert(inout appdata_full v, out Input data)
+			{
+				UNITY_INITIALIZE_OUTPUT(Input, data);
+				float4 hpos = UnityObjectToClipPos(v.vertex);
+				hpos.xy /= hpos.w;
+				data.fog = min(1, dot(hpos.xy, hpos. xy) * 0.5);
+			}
+
+			void FogColour(Input IN, SurfaceOutput o, inout fixed4 colour)
+			{
+				fixed3 fogColour = _FogColour.rgb;
+				#ifdef UNITY_PASS_FORWARDADD 
+				fogColour = 0;
+				#endif
+				colour.rgb = lerp(colour.rgb, fogColour, IN.fog);
+			}
+
+			void MainColour(Input IN, inout SurfaceOutput o)
+			{
+				o.Albedo = tex2D(_Texture, IN.uv_Texture).rgb * _Colour; //Albedo is in reference to the surface Image and RGB of our model. We are setting the models surface to the colour of our Texture2D and matching the Texture to our models UV mapping.
+				o.Normal = UnpackNormal(tex2D(_Texture, IN.uv_NormalMap)); //_NormalMap is in reference to the bump map in properties. UnpackNormal is required because the file is compressed. We need to decompress and get the true value from the  Image. Bump maps are visible when light reflects off of the surface. The light is bounced off at angles according to the images RGB or XYZ values. This creates the illusion of depth.
+			}
+		ENDCG //This is the end of our C for Graphics Language.
+	}
+	FallBack "Diffuse" //If all else fails standard shader(Lambert and Texture).
+}
