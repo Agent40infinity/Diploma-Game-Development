@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     public void Movement()
     {
-        if (canMove == true) //canMove check
+        if (canMove) //canMove check
         {
             if (controller.isGrounded) //isGrounded check
             {
