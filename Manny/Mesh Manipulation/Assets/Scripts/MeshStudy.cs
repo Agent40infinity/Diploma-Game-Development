@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+[ExecuteInEditMode]
 public class MeshStudy : MonoBehaviour
 {
     Mesh oMesh;
@@ -31,10 +32,36 @@ public class MeshStudy : MonoBehaviour
 
     public void InitMesh()
     {
+        oMeshFilter = GetComponent<MeshFilter>();
+        oMesh = oMeshFilter.sharedMesh; 
+
+        cMesh = new Mesh(); 
+        cMesh.name = "clone";
+        cMesh.vertices = oMesh.vertices;
+        cMesh.triangles = oMesh.triangles;
+        cMesh.normals = oMesh.normals;
+        cMesh.uv = oMesh.uv;
+        oMeshFilter.mesh = cMesh;  
+
+        vertices = cMesh.vertices; 
+        triangles = cMesh.triangles;
+        isCloned = true;
+        Debug.Log("Init & Cloned");
     }
 
     public void Reset()
     {
+        if (cMesh != null && oMesh != null) //Check for Original and Clone Mesh's existance 
+        {
+            cMesh.vertices = oMesh.vertices; //Reset cMesh
+            cMesh.triangles = oMesh.triangles;
+            cMesh.normals = oMesh.normals;
+            cMesh.uv = oMesh.uv;
+            oMeshFilter.mesh = cMesh; //Assign cMesh to oMeshFilter
+
+            vertices = cMesh.vertices; //Update
+            triangles = cMesh.triangles;
+        }
     }
 
     public void GetConnectedVertices()
@@ -44,7 +71,8 @@ public class MeshStudy : MonoBehaviour
 
     public void DoAction(int index, Vector3 localPos)
     {
-        // specify methods here
+        //PullOneVertex(index, localPos);
+        PullSimilarVertices(index, localPos);
     }
 
     // returns List of int that is related to the targetPt.
@@ -108,10 +136,21 @@ public class MeshStudy : MonoBehaviour
     // Pulling only one vertex pt, results in broken mesh.
     private void PullOneVertex(int index, Vector3 newPos)
     {
+        vertices[index] = newPos; 
+        cMesh.vertices = vertices; 
+        cMesh.RecalculateNormals(); 
     }
 
     private void PullSimilarVertices(int index, Vector3 newPos)
     {
+        Vector3 targetVertexPos = vertices[index]; 
+        List<int> relatedVertices = FindRelatedVertices(targetVertexPos, false);
+        foreach (int i in relatedVertices)
+        {
+            vertices[i] = newPos;
+        }
+        cMesh.vertices = vertices;
+        cMesh.RecalculateNormals();
     }
 
     // To test Reset function

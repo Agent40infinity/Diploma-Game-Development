@@ -48,6 +48,11 @@ public class HeartMeshInspector : Editor
         // unselected vertex
         if (!mesh.selectedIndices.Contains(index))
         {
+            Handles.color = Color.blue;
+            if (Handles.Button(point, handleRotation, mesh.pickSize, mesh.pickSize, Handles.DotHandleCap)) 
+            {
+                mesh.selectedIndices.Add(index); 
+            }
         }
     }
 
@@ -66,6 +71,39 @@ public class HeartMeshInspector : Editor
                 {
                     Debug.DrawLine(handleTransform.TransformPoint(verts[i]), handleTransform.TransformPoint(normals[i]), Color.green, 4.0f, true);
                 }
+            }
+        }
+
+        if (GUILayout.Button("Clear Selected Vertices"))
+        {
+            mesh.ClearAllData();
+        }
+
+        if (!mesh.isEditMode && mesh.isMeshReady)
+        {
+            string path = "Assets/Prefabs/CustomHeart.prefab"; 
+
+            if (GUILayout.Button("Save Mesh"))
+            {
+                mesh.isMeshReady = false;
+                Object pfObj = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)); 
+                Object pfRef = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+                GameObject gameObj = (GameObject)PrefabUtility.InstantiatePrefab(pfObj);
+                Mesh pfMesh = (Mesh)AssetDatabase.LoadAssetAtPath(path, typeof(Mesh)); 
+                if (!pfMesh)
+                {
+                    pfMesh = new Mesh();
+                }
+                else
+                {
+                    pfMesh.Clear();
+                }
+                pfMesh = mesh.SaveMesh(); 
+                AssetDatabase.AddObjectToAsset(pfMesh, path);
+
+                gameObj.GetComponentInChildren<MeshFilter>().mesh = pfMesh; 
+                PrefabUtility.ReplacePrefab(gameObj, pfRef, ReplacePrefabOptions.Default);
+                Object.DestroyImmediate(gameObj); 
             }
         }
     }
