@@ -61,10 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CameraShader\AnalogueGlitch.cs" />
+    <Compile Include="Assets\CameraShader\DrawingPaper.cs" />
+    <Compile Include="Assets\CameraShader\PaperShader.cs" />
     <None Include="Assets\Shaders\Scipts\NormalAlbedoColourTintFog.shader" />
     <None Include="Assets\Shaders\Scipts\AlbedoGreyScale.shader" />
     <None Include="Assets\Shaders\Scipts\NormalAlbedo.shader" />
+    <None Include="Assets\CameraShader\PaperShader.shader" />
     <None Include="Assets\CameraShader\Analogue.shader" />
+    <None Include="Assets\CameraShader\DrawingPaper.shader" />
     <None Include="Assets\Shaders\Scipts\Albedo.shader" />
     <None Include="Assets\Shaders\Scipts\NormalAlbedoColourTint.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

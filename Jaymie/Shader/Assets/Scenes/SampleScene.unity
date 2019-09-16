@@ -193,6 +193,8 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669907}
+  - component: {fileID: 534669908}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -271,7 +273,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f607788ab6d541741b6bb5cc39363cd8, type: 3}
   m_Name: 
@@ -281,6 +283,52 @@ MonoBehaviour:
   _horizontalShake: 0
   _colourDrift: 0
   _shader: {fileID: 4800000, guid: eddb2a9b4b9e3d748a57a038501faff1, type: 3}
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31da37e18bf6e344193e635f47948b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 436452ebac09c55418a41302baf47b6d, type: 3}
+  pencilColor: {r: 0.047169805, g: 0, b: 0, a: 0}
+  pencilSize: 0.395
+  pencilCorrection: 1.765
+  intensity: 1
+  animationSpeed: 1
+  cornerLoss: 0.406
+  paperFadeIn: 1
+  paperFadeColor: 0.985
+  backColor: {r: 1, g: 1, b: 1, a: 1}
+  paper: {fileID: 2800000, guid: 7b97cf94ee552fa498e93a488ba2455f, type: 3}
+--- !u!114 &534669908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d850557e0f989544889f5a88efeef4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 37c90f7b0fa7ca649a77554eff559ca5, type: 3}
+  pencilColour: {r: 0, g: 0, b: 0, a: 0}
+  pencilSize: 0.00125
+  pencilCorrection: 0.35
+  intensity: 1
+  animationSpeed: 1
+  cornerLoss: 1
+  paperFadeIn: 0
+  paperFadeColor: 1
+  backColor: {r: 1, g: 1, b: 1, a: 1}
+  paper: {fileID: 2800000, guid: 7b97cf94ee552fa498e93a488ba2455f, type: 3}
 --- !u!1 &881933264
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960250864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 2, z: 0}
+  m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
