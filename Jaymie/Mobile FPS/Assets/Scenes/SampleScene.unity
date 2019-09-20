@@ -501,12 +501,15 @@ MonoBehaviour:
   speed: 5
   sprintSpeed: 10
   gravity: 20
-  axis: 0
   sensX: 15
   sensY: 15
   minY: -85
   maxY: 85
   rotationY: 0
+  bulletSpeed: 100
+  fireCooldown: 0
+  fireSpeed: 0.1
+  canFire: 0
   camera: {fileID: 0}
 --- !u!1 &1075789329
 GameObject:
