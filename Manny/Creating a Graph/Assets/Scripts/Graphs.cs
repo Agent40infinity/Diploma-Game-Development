@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +6,17 @@ public class Graphs : MonoBehaviour
 {
     #region Variables - Graph 
     [Range(10, 100)]
-    public int resolution = 10;
-    Transform[] points;
-    public Transform pointPrefab;
+    public int resolution = 10; //Determines how many points will be created.
+    Transform[] points; //Creates a array of points created from the Prefab.
+    public Transform pointPrefab; //References the points Prefab.
     #endregion
 
     #region Variables - Mathematical Surfaces 
-    public GraphFunctionName function;
-    const float pi = Mathf.PI;
+    public GraphFunctionName function; //Creates a reference to the GraphFunctionName enum script.
+    const float pi = Mathf.PI; //Creates a reference for PI to shorten the amount of times Mathf is needed.
     public int type;
 
-    static Vector3 SineFunction(float x, float z, float t)
+    static Vector3 SineFunction(float x, float z, float t) //Used to determine the values for what the appearance of a Single SineFunction.
     {
         Vector3 p;
         p.x = x;
@@ -25,7 +25,7 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static Vector3 Sine2DFunction(float x, float z, float t)
+    static Vector3 Sine2DFunction(float x, float z, float t) //Used to determine the values for what the appearance of a Single SineFunction from a 2D plane.
     {
         Vector3 p;
         p.x = x;
@@ -37,7 +37,7 @@ public class Graphs : MonoBehaviour
 
     }
 
-    static Vector3 MultiSineFunction(float x, float z, float t)
+    static Vector3 MultiSineFunction(float x, float z, float t) //Used to determine the values for what the appearance of a MultiSineFunction.
     {
         Vector3 p;
         p.x = x;
@@ -48,7 +48,7 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static Vector3 MultiSine2DFunction(float x, float z, float t)
+    static Vector3 MultiSine2DFunction(float x, float z, float t) //Used to determine the values for what appearance of the MultiSineFunction from a 2D plane.
     {
         Vector3 p;
         p.x = x;
@@ -62,7 +62,7 @@ public class Graphs : MonoBehaviour
         
     }
 
-    static Vector3 Ripple(float x, float z, float t) //Used to determine the values for the position of each instantiated object to create a Ripple effect.
+    static Vector3 Ripple(float x, float z, float t) //Used to determine the values for the position of each instantiated object to create a Ripple effect. Animated Ripple Effect.
     {
         Vector3 p;
         float d = Mathf.Sqrt(x * x + z * z);
@@ -73,7 +73,7 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static Vector3 Cylinder(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a Cylinder like shape.
+    static Vector3 Cylinder(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a Cylinder like shape. Cylinder like appearance.
     {
         Vector3 p;
         float r = 0.8f + Mathf.Sin(pi * (6f * u + 2f * v + t)) * 0.2f;
@@ -83,7 +83,7 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static Vector3 Sphere(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a Sphere like shape.
+    static Vector3 Sphere(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a Sphere like shape. Creates a spherical like shape.
     {
         Vector3 p;
         float r = 0.8f + Mathf.Sin(pi * (6f * u + t)) * 0.1f;
@@ -95,7 +95,7 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static Vector3 Torus(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a torus like shape.
+    static Vector3 Torus(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a torus like shape. Any shape takes the form of a Torus.
     {
         Vector3 p;
         float r1 = 0.65f + Mathf.Sin(pi * (6f * u + t)) * 0.1f;
@@ -119,20 +119,20 @@ public class Graphs : MonoBehaviour
         return p;
     }
 
-    static GraphFunction[] functions =
+    static GraphFunction[] functions = //Creates a reference to each type of shape being created to allow for it's generation.
     {
         SineFunction, Sine2DFunction, MultiSineFunction, MultiSine2DFunction, Ripple, Cylinder, Sphere, Torus, RandomObject
     };
     #endregion
 
     #region Creating a Graph
-    public void Awake()
+    public void Awake() //Sets up how many points will be created and where their original position will lie.
     {
         float step = 2f / resolution;
         Vector3 scale = Vector3.one / 5f;
         points = new Transform[resolution * resolution];
 
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points.Length; i++) //Checks how many points there are in total and instantiates a new point based on the Length. It then saves the Transform of the point into an array for furture use.
         {
             Transform point = Instantiate(pointPrefab);
             point.localScale = scale;
@@ -141,7 +141,7 @@ public class Graphs : MonoBehaviour
         }
     }
 
-    public void Update()
+    public void Update() //Used to update the position of each point based upon the resolution. It then checks and applies the pattern in which the points will move to (the graph functions: sphere, torus, cylinder, etc).
     {
         float t = Time.time;
         GraphFunction f = functions[(int)function];
