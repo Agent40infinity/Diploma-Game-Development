@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
     #endregion
 
     //MouseMovement: 
-    //public RotationalAxis axis = RotationalAxis.MouseX;
-
     [Range(0, 20)]
     public float sensX = 15;
     [Range(0, 20)]
@@ -26,6 +24,12 @@ public class Player : MonoBehaviour
     public float minY = -85;
     public float maxY = 85;
     public float rotationY = 0;
+
+    //Shooting:
+    public float bulletSpeed = 100f;
+    public float fireCooldown;
+    public float fireSpeed = 0.1f;
+    public bool canFire;
 
     //References:
     private CharacterController controller;
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
     {
         Movement();
         MouseMovement();
+        Shooting();
     }
 
     public void Movement()
@@ -79,6 +84,32 @@ public class Player : MonoBehaviour
             rotationY += Input.GetAxis("Mouse Y") * sensY;
             rotationY = Mathf.Clamp(rotationY, minY, maxY);
             camera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+        }
+    }
+    #endregion
+
+    #region Shooting
+    public void Shooting()
+    {
+        if (Input.GetMouseButton(0) && canFire)
+        {
+            GameObject bullet = Resources.Load<GameObject>("Prefabs/Bullet");
+            Instantiate(bullet, transform.position, Quaternion.identity);
+            Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
+            bulletRigid.AddForce(Vector3.forward * speed, ForceMode.Impulse);
+            Debug.Log("Bullet: " + bulletRigid + " force: " + bulletRigid.velocity);
+            fireCooldown = fireSpeed;
+        }
+
+        if (fireCooldown <= 0)
+        {
+            canFire = true;
+            fireCooldown = 0;
+        }
+        else
+        {
+            canFire = false;
+            fireCooldown -= Time.deltaTime;
         }
     }
     #endregion
