@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     public Vector3 groundedOverlay = new Vector3(0.2f, 0.1f, 0.2f); //Vector3 used to store the values for the collider used to check for isGrounded.
     public Vector3 groundDistance = new Vector3(0f, -1f, 0f); //Vector3 used to store the position of the isGrounded check.
 
+    //Shooting:
+    public bool canFire = true;
+    public float fireCooldown = 0.15f;
+    public float fireSpeed = 0.15f;
+
     //MouseMovement: 
     [Range(0, 20)]
     public float sensX = 15; //Sensitivity for X axis of mouse.
@@ -64,7 +69,7 @@ public class Player : MonoBehaviour
     {
         canMove = true;
         controller = gameObject.GetComponent<CharacterController>();
-        camera = gameObject.GetComponentInChildren<Camera>();
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     public void Update() //Used to make reference to the sub-routines/methods.
@@ -94,19 +99,6 @@ public class Player : MonoBehaviour
                 moveDirection.y = 0;
                 gravityIncreaseTimer = 0;
                 appliedGravity = gravity;
-                if (Input.GetButtonDown("Jump") && canIncrease == true && sprintSpeed <= 35) //Checks if the player can Increase their sprintSpeed and is attempting to jump to apply extra velocity.
-                {
-                    moveDirection.y += jumpSpeed;
-                    increaseTimer = 0;
-                    sprintSpeed *= 1.2f;
-                    canIncrease = true;
-                }
-                else if (Input.GetButtonDown("Jump")) //Defaults back to default jump.
-                {
-                    moveDirection.y += jumpSpeed;
-                    increaseTimer = 0;
-                    canIncrease = true;
-                }
             }
             else //If the player isn't grounded, change values for gravity overtime.
             {
@@ -131,17 +123,6 @@ public class Player : MonoBehaviour
             moveDirection.y -= appliedGravity * Time.deltaTime; //Applies gravity.
             controller.Move(moveDirection * Time.deltaTime); //Applies movement.
         }
-
-        if (canIncrease == true && increaseTimer >= 0 && isGrounded()) //Used to start the timer that disables the ability to increase sprintSpeed.
-        {
-            increaseTimer += Time.deltaTime;
-            if (increaseTimer >= 0.1f) //If the increase timer is over a certain amount, disables the ability to increase sprintSpeed.
-            {
-                sprintSpeed = 15;
-                increaseTimer = 0;
-                canIncrease = false;
-            }
-        }
     }
     #endregion
 
@@ -163,11 +144,7 @@ public class Player : MonoBehaviour
     {
         if (gameObject.transform.position.y <= teleportPoint) //Checks if the player's y level is below the teleport positon's value.
         {
-            Debug.Log("Yeet");
-            Debug.Log(transform.position);
             gameObject.transform.position = spawnPoint;
-            Debug.Log("Attempted");
-            Debug.Log(transform.position);
         }
     }
     #endregion
@@ -178,7 +155,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && canFire)
         {
             GameObject bullet = Resources.Load<GameObject>("Prefabs/Bullet");
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            Instantiate(bullet, transform.position, Quaternion.identity);   
             Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
             bulletRigid.AddForce(Vector3.forward * speed, ForceMode.Impulse);
             Debug.Log("Bullet: " + bulletRigid + " force: " + bulletRigid.velocity);
