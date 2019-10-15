@@ -63,11 +63,11 @@ public static class ItemData
             case 300:
                 name = "Apple";
                 description = "It fell from a tree.";
-                amount = 0;
-                _value = 0;
+                amount = 1;
+                _value = 5;
                 damage = 0;
                 armour = 0;
-                heal = 0;
+                heal = 2;
                 icon = "Apple";
                 mesh = "Apple";
                 type = ItemType.Food;
@@ -77,8 +77,8 @@ public static class ItemData
             case 400:
                 name = "Cloths";
                 description = "Stops you from taking as much damage.";
-                amount = 0;
-                _value = 0;
+                amount = 1;
+                _value = 125;
                 damage = 0;
                 armour = 2;
                 heal = 0;
@@ -184,7 +184,8 @@ public static class ItemData
             Armour = armour,
             Heal = heal,
             Icon = Resources.Load("Icons/" + icon) as Texture2D,
-            ItemModel = Resources.Load("Mesh/" + mesh) as GameObject
+            ItemModel = Resources.Load("Mesh/" + mesh) as GameObject,
+            Type = type
         };
         return temp;
     }

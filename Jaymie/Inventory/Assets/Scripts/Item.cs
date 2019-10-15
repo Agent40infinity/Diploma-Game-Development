@@ -79,6 +79,12 @@ public class Item
         get { return mesh; }
         set { mesh = value; }
     }
+
+    public ItemType Type
+    {
+        get { return type; }
+        set { type = value; }
+    }
     #endregion
 }
 
