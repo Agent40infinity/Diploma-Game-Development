@@ -124,6 +124,7 @@ namespace Linear
 
         public void CheckForDuplicates()
         {
+            //bool beenAdded = false;
             List<Item> itemsToAdd = new List<Item>();
             for (int i = 0; i < 10; i++)
             {
@@ -131,17 +132,35 @@ namespace Linear
             }
             for (int i = 0; i < itemsToAdd.Count; i++)
             {
-                for (int j = 0; j < inv.Count; j++)
+                if (inv.Count != 0 /*&& beenAdded == false*/)
                 {
-                    if (inv != null && inv[j].Name == itemsToAdd[i].Name)
+                    for (int j = 0; j < inv.Count; j++)
                     {
-                        inv[j].Amount++;
-                    }
-                    else
-                    {
-                        inv.Add(itemsToAdd[i]);
+                        if (inv[j].Name == itemsToAdd[i].Name)
+                        {
+                            inv[j].Amount++;
+                            itemsToAdd[i] = null;
+                            j = inv.Count;
+                            //beenAdded = true;
+                        }
+                        else 
+                        {
+                            inv.Add(itemsToAdd[i]);
+                            itemsToAdd[i] = null;
+                            j = inv.Count;
+                            //beenAdded = true;
+                        }
+                        i++;
                     }
                 }
+                else
+                {
+                    inv.Add(itemsToAdd[i]);
+                    itemsToAdd[i] = null;
+                    i++;
+                    //beenAdded = true;
+                }
+                //beenAdded = false;
             }
             //itemsToAdd = null;
         }
