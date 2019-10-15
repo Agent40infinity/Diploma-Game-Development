@@ -27,7 +27,7 @@ public static class ItemData
                 armour = 0;
                 heal = 1;
                 icon = "mushroom";
-                mesh = "Mushroom";
+                mesh = "";
                 type = ItemType.Ingrediant;
                 break;
             #endregion
@@ -41,7 +41,7 @@ public static class ItemData
                 armour = 0;
                 heal = 25;
                 icon = "Potion";
-                mesh = "Potion";
+                mesh = "";
                 type = ItemType.Potions;
                 break;
             #endregion
@@ -55,7 +55,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Scroll";
-                mesh = "Scroll";
+                mesh = "";
                 type = ItemType.Scrolls;
                 break;
             #endregion
@@ -69,7 +69,7 @@ public static class ItemData
                 armour = 0;
                 heal = 2;
                 icon = "Apple";
-                mesh = "Apple";
+                mesh = "";
                 type = ItemType.Food;
                 break;
             #endregion
@@ -111,7 +111,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Stick";
-                mesh = "Stick";
+                mesh = "";
                 type = ItemType.Craftable;
                 break;
             #endregion
@@ -125,7 +125,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Gold";
-                mesh = "Gold";
+                mesh = "";
                 type = ItemType.Money;
                 break;
             #endregion
@@ -139,7 +139,7 @@ public static class ItemData
                 armour = 100;
                 heal = 100;
                 icon = "Stone";
-                mesh = "Stone";
+                mesh = "";
                 type = ItemType.Quest;
                 break;
             #endregion
@@ -153,7 +153,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Gem";
-                mesh = "Gem";
+                mesh = "";
                 type = ItemType.Misc;
                 break;
             #endregion
@@ -167,7 +167,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Apple";
-                mesh = "Stick";
+                mesh = "";
                 type = ItemType.Misc;
                 break;
             #endregion

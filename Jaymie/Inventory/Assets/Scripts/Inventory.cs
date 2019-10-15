@@ -40,12 +40,13 @@ namespace Linear
 
         private void Update()
         { 
-            if (Input.GetKey(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    inv.Add(ItemData.CreateItem(i * 100));
-                }
+                CheckForDuplicates();
+                //for (int i = 0; i < 10; i++)
+                //{
+                //    inv.Add(ItemData.CreateItem(i * 100));
+                //}
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -59,7 +60,7 @@ namespace Linear
                 else
                 {
                     Time.timeScale = 0;
-                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     isShown = true;
                 }
@@ -87,6 +88,7 @@ namespace Linear
                     GUI.Box(new Rect(4.125f * scrt.x, 5 * scrt.y, 3.5f * scrt.x, 0.4f * scrt.y), "Price: " + selectedItem.Value); //Displays the Selected Item's Value
                     GUI.Box(new Rect(4.125f * scrt.x, 5.35f * scrt.y, 3.5f * scrt.x, 0.4f * scrt.y), "Category: " + selectedItem.Type); //Displays the Selected Item's categorised type
                     GUI.skin = null; //returns the skin to null
+                    ItemUse(selectedItem.Type);
                 }
                 else { return; }
             }
@@ -120,6 +122,30 @@ namespace Linear
             }
         }
 
+        public void CheckForDuplicates()
+        {
+            List<Item> itemsToAdd = new List<Item>();
+            for (int i = 0; i < 10; i++)
+            {
+                itemsToAdd.Add(ItemData.CreateItem(i * 100));
+            }
+            for (int i = 0; i < itemsToAdd.Count; i++)
+            {
+                for (int j = 0; j < inv.Count; j++)
+                {
+                    if (inv != null && inv[j].Name == itemsToAdd[i].Name)
+                    {
+                        inv[j].Amount++;
+                    }
+                    else
+                    {
+                        inv.Add(itemsToAdd[i]);
+                    }
+                }
+            }
+            //itemsToAdd = null;
+        }
+
         public void ItemUse(ItemType type)
         {
             switch (type)
@@ -146,17 +172,24 @@ namespace Linear
                     break;
             }
 
-            if (GUI.Button(new Rect(scrt.x, scrt.y, scrt.x, scrt.y), "Discard")) //Creates a button to discard items
+            GUI.skin = invSkin;
+            if (GUI.Button(new Rect(6f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Discard")) //Creates a button to discard items
             {
                 if (equipmentSlots[1].curItem != null && selectedItem.ItemModel.name == equipmentSlots[1].name) //Checks whether or not the item is a peice of armour and is equip
                 {
                     Destroy(equipmentSlots[1].curItem); //Distroys the GameObject attached to the player
                 }
-                GameObject droppedItem = Instantiate(selectedItem.ItemModel, dropLocation.position, Quaternion.identity) as GameObject; //Creates and spawns a new GameObject to represent the dropped item\
-                droppedItem.name = selectedItem.Name; //Matches the name of the selectedItem with the name of the new GameObject
-                droppedItem.AddComponent<Rigidbody>().useGravity = true; //Attaches a Rigidbody to the droppedItem GameObject
-                droppedItem.AddComponent<BoxCollider>(); //Attaches a BoxCollider to the droppedItem GameObject
+                if (selectedItem.ItemModel != null)
+                {
+                    GameObject droppedItem = Instantiate(selectedItem.ItemModel, dropLocation.position, Quaternion.identity) as GameObject; //Creates and spawns a new GameObject to represent the dropped item\
+                    droppedItem.name = selectedItem.Name; //Matches the name of the selectedItem with the name of the new GameObject
+                    droppedItem.AddComponent<Rigidbody>().useGravity = true; //Attaches a Rigidbody to the droppedItem GameObject
+                    droppedItem.AddComponent<BoxCollider>(); //Attaches a BoxCollider to the droppedItem GameObject
+                }
+                inv.Remove(selectedItem);
+                selectedItem = null;
             }
+            GUI.skin = null;
         }
     }
 }
