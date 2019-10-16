@@ -40,13 +40,9 @@ namespace Linear
 
         private void Update()
         { 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKey(KeyCode.Alpha1))
             {
                 CheckForDuplicates();
-                //for (int i = 0; i < 10; i++)
-                //{
-                //    inv.Add(ItemData.CreateItem(i * 100));
-                //}
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -124,45 +120,38 @@ namespace Linear
 
         public void CheckForDuplicates()
         {
-            //bool beenAdded = false;
-            List<Item> itemsToAdd = new List<Item>();
-            for (int i = 0; i < 10; i++)
+            List<Item> itemsToAdd = new List<Item>(); //Creates a list to store the items being added to the inventory
+            for (int i = 0; i < (int)Random.Range(0, 10); i++) //For statement for finding all items being added
             {
-                itemsToAdd.Add(ItemData.CreateItem(i * 100));
+                itemsToAdd.Add(ItemData.CreateItem((int)Random.Range(0, 10) * 100)); //Adds the items to the list
             }
-            for (int i = 0; i < itemsToAdd.Count; i++)
+            for (int i = 0; i < itemsToAdd.Count; i++) //Checks for each item within the list
             {
-                if (inv.Count != 0 /*&& beenAdded == false*/)
+                if (inv.Count != 0) //Checks if the inventory is full to allow for the first item to be added.
                 {
-                    for (int j = 0; j < inv.Count; j++)
+                    for (int j = 0; j < inv.Count; j++) //Used to load each item within the inventory to allow it to be checked
                     {
-                        if (inv[j].Name == itemsToAdd[i].Name)
+                        if (inv[j].Name == itemsToAdd[i].Name) //Used to check if the name of the item in the inventory is the same as the item attempting to be added to allow for the removal of duplicate items
                         {
-                            inv[j].Amount++;
-                            itemsToAdd[i] = null;
-                            j = inv.Count;
-                            //beenAdded = true;
+                            inv[j].Amount++; //Adds the duplicate item to the existing item's count
+                            itemsToAdd[i] = null; //Sets the item to null to remove it from the list
+                            j = inv.Count; //Jumps to the null item to end the for loop
                         }
-                        else 
+                        else if (j == inv.Count - 1) //Checks if j has reached the last item within the list of items to add so that it can create a new non-duplicate entry
                         {
-                            inv.Add(itemsToAdd[i]);
-                            itemsToAdd[i] = null;
-                            j = inv.Count;
-                            //beenAdded = true;
+                            inv.Add(itemsToAdd[i]); //Adds the new item to the inventory
+                            itemsToAdd[i] = null; //Sets the  item to null to remove it from the list
+                            j = inv.Count; //Jumps to the null item to end the for loop
                         }
-                        i++;
+                        Debug.Log(i);
                     }
                 }
-                else
+                else //Used to add the first item in the inventory
                 {
-                    inv.Add(itemsToAdd[i]);
-                    itemsToAdd[i] = null;
-                    i++;
-                    //beenAdded = true;
+                    inv.Add(itemsToAdd[i]); //Adds the item to the inventory
+                    itemsToAdd[i] = null; //Sets the item to null to remove it from the list
                 }
-                //beenAdded = false;
             }
-            //itemsToAdd = null;
         }
 
         public void ItemUse(ItemType type)
@@ -205,8 +194,15 @@ namespace Linear
                     droppedItem.AddComponent<Rigidbody>().useGravity = true; //Attaches a Rigidbody to the droppedItem GameObject
                     droppedItem.AddComponent<BoxCollider>(); //Attaches a BoxCollider to the droppedItem GameObject
                 }
-                inv.Remove(selectedItem);
-                selectedItem = null;
+                if (selectedItem.Amount != 0) //Checks if there is more than one item of that same type in your inventory
+                {
+                    selectedItem.Amount--; //Deducts item's amount
+                }
+                else 
+                {
+                    inv.Remove(selectedItem); //Removes the item entry completely
+                    selectedItem = null; //Sets selectedItem to null
+                }
             }
             GUI.skin = null;
         }
