@@ -138,8 +138,8 @@ namespace Linear
                             {
                                 selectedItem = inv[i]; //Selects the item if clicked
                             }
-                            s++;
                         }
+                        s++;
                     }
                     GUI.EndScrollView(); //Ends the ability to scroll
                 }
@@ -185,7 +185,7 @@ namespace Linear
                 {
                     for (int j = 0; j < inv.Count; j++) //Used to load each item within the inventory to allow it to be checked
                     {
-                        if (inv[j].Name == itemsToAdd[i].Name) //Used to check if the name of the item in the inventory is the same as the item attempting to be added to allow for the removal of duplicate items
+                        if (inv[j].Name == itemsToAdd[i].Name && inv[j].Type != ItemType.Armour && inv[j].Type != ItemType.Weapon) //Used to check if the name of the item in the inventory is the same as the item attempting to be added to allow for the removal of duplicate items
                         {
                             inv[j].Amount++; //Adds the duplicate item to the existing item's count
                             itemsToAdd[i] = null; //Sets the item to null to remove it from the list

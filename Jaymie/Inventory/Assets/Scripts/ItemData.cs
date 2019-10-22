@@ -27,7 +27,7 @@ public static class ItemData
                 armour = 0;
                 heal = 1;
                 icon = "mushroom";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Ingrediant;
                 break;
             #endregion
@@ -41,7 +41,7 @@ public static class ItemData
                 armour = 0;
                 heal = 25;
                 icon = "Potion";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Potions;
                 break;
             #endregion
@@ -49,13 +49,13 @@ public static class ItemData
             case 200:
                 name = "Magic Scroll";
                 description = "Does magic and shit.";
-                amount = 1;
+                amount = 1; 
                 _value = 100;
                 damage = 10;
                 armour = 0;
                 heal = 0;
                 icon = "Scroll";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Scrolls;
                 break;
             #endregion
@@ -69,7 +69,7 @@ public static class ItemData
                 armour = 0;
                 heal = 2;
                 icon = "Apple";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Food;
                 break;
             #endregion
@@ -111,7 +111,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Stick";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Craftable;
                 break;
             #endregion
@@ -125,7 +125,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Gold";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Money;
                 break;
             #endregion
@@ -139,7 +139,7 @@ public static class ItemData
                 armour = 100;
                 heal = 100;
                 icon = "Stone";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Quest;
                 break;
             #endregion
@@ -153,7 +153,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Gem";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Misc;
                 break;
             #endregion
@@ -167,7 +167,7 @@ public static class ItemData
                 armour = 0;
                 heal = 0;
                 icon = "Apple";
-                mesh = "";
+                mesh = "Sword";
                 type = ItemType.Misc;
                 break;
             #endregion
