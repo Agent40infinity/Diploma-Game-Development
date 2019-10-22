@@ -193,7 +193,7 @@ GameObject:
   m_Layer: 0
   m_Name: DropLocation
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -311,6 +311,18 @@ MonoBehaviour:
   scrollPos: {x: 0, y: 0}
   money: 0
   sortType: 
+  sortList:
+  - All
+  - Ingrediant
+  - Potions
+  - Scrolls
+  - Food
+  - Armour
+  - Weapon
+  - Craftable
+  - Money
+  - Quest
+  - Misc
   inventorySize: 34
   dropLocation: {fileID: 425519179}
   invSkin: {fileID: 11400000, guid: fb37b5b75e135954b9b800d22d44c405, type: 2}
@@ -333,7 +345,7 @@ GameObject:
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -345,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040878278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.263, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1450816778}
@@ -549,7 +561,7 @@ GameObject:
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
-  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

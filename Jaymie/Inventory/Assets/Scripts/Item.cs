@@ -90,6 +90,7 @@ public class Item
 
 public enum ItemType
 {
+    All,
     Ingrediant,
     Potions,
     Scrolls,

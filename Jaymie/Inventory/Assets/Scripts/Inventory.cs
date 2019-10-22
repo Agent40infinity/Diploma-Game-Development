@@ -15,6 +15,7 @@ namespace Linear
         public Vector2 scrollPos;
         public int money;
         public string sortType = "";
+        public string[] sortList;
         public int inventorySize = 34;
 
         //References:
@@ -36,6 +37,7 @@ namespace Linear
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            sortList = System.Enum.GetNames(typeof(ItemType));
         }
 
         private void Update()
@@ -71,6 +73,13 @@ namespace Linear
                 scrt.y = Screen.height / 9;
 
                 GUI.Box(new Rect(0, 0, scrt.x * 8, Screen.height), ""); //Background
+                for (int i = 0; i < sortList.Length; i++) //For each type within Item
+                {
+                    if (GUI.Button(new Rect((i + 4.25f) * scrt.x, 0, scrt.x, 0.25f * scrt.y), sortList[i])) //Creates a button bsaed on the Item Type
+                    {
+                        sortType = sortList[i]; //Sets the type based on the Index
+                    }
+                }
                 Display();
 
                 if (selectedItem != null) //Displays the selected Item's information
@@ -92,29 +101,74 @@ namespace Linear
 
         public void Display()
         {
-            if (inv.Count <= inventorySize) //Checks if the page is full
+            if (!(sortType == "All" || sortType == ""))
             {
-                for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory
+                ItemType type = (ItemType)System.Enum.Parse(typeof(ItemType), sortType);
+                int a = 0; //amount
+                int s = 0; //slot
+                for (int i = 0; i < inv.Count; i++)
                 {
-                    if (GUI.Button(new Rect(0.5f * scrt.x, 0.25f * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                    if (inv[i].Type == type)
                     {
-                        selectedItem = inv[i]; //Selects the item if clicked
+                        a++;
                     }
+                }
+                if (a <= inventorySize)
+                {
+                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
+                    {
+                        if (inv[i].Type == type)
+                        {
+                            if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                            {
+                                selectedItem = inv[i]; //Selects the item if clicked
+                            }
+                        }
+                    }
+                }
+                else //Checks if the page can be scrolled 
+                {
+                    scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scrt.y, 3.75f * scrt.x, 8.5f * scrt.y), scrollPos, new Rect(0, 0, 0, 8.5f * scrt.y + ((inv.Count - inventorySize) * (0.25f * scrt.y))), false, true); //Creates a vertical scroll bar
+
+                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
+                    {
+                        if (inv[i].Type == type)
+                        {
+                            if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                            {
+                                selectedItem = inv[i]; //Selects the item if clicked
+                            }
+                            s++;
+                        }
+                    }
+                    GUI.EndScrollView(); //Ends the ability to scroll
                 }
             }
-            else //Checks if the page can be scrolled 
+            else
             {
-                scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scrt.y, 3.75f * scrt.x, 8.5f * scrt.y), scrollPos, new Rect(0, 0, 0, 8.5f * scrt.y + ((inv.Count - inventorySize) * (0.25f * scrt.y))), false, true); //Creates a vertical scroll bar
-
-                for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
+                if (inv.Count <= inventorySize) //Checks if the page is full
                 {
-                    if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory
                     {
-                        selectedItem = inv[i]; //Selects the item if clicked
+                        if (GUI.Button(new Rect(0.5f * scrt.x, 0.25f * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                        {
+                            selectedItem = inv[i]; //Selects the item if clicked
+                        }
                     }
                 }
+                else //Checks if the page can be scrolled 
+                {
+                    scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scrt.y, 3.75f * scrt.x, 8.5f * scrt.y), scrollPos, new Rect(0, 0, 0, 8.5f * scrt.y + ((inv.Count - inventorySize) * (0.25f * scrt.y))), false, true); //Creates a vertical scroll bar
 
-                GUI.EndScrollView(); //Ends the ability to scroll
+                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
+                    {
+                        if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
+                        {
+                            selectedItem = inv[i]; //Selects the item if clicked
+                        }
+                    }
+                    GUI.EndScrollView(); //Ends the ability to scroll
+                }
             }
         }
 
@@ -156,6 +210,8 @@ namespace Linear
 
         public void ItemUse(ItemType type)
         {
+            GUI.skin = invSkin;
+            int slotIndex = 0;
             switch (type)
             {
                 case ItemType.Ingrediant:
@@ -167,7 +223,8 @@ namespace Linear
                 case ItemType.Food:
                     break;
                 case ItemType.Armour:
-                    break;
+                    slotIndex = 1;
+                        break;
                 case ItemType.Weapon:
                     break;
                 case ItemType.Craftable:
@@ -180,7 +237,27 @@ namespace Linear
                     break;
             }
 
-            GUI.skin = invSkin;
+            if (equipmentSlots[slotIndex].curItem == null || selectedItem.Name != equipmentSlots[slotIndex].curItem.name)
+            {
+                if (GUI.Button(new Rect(4.1f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Equip"))
+                {
+                    if (equipmentSlots[slotIndex].curItem != null)
+                    {
+                        Destroy(equipmentSlots[slotIndex].curItem);
+                    }
+                    GameObject curItem = Instantiate(selectedItem.ItemModel, equipmentSlots[slotIndex].location);
+                    equipmentSlots[slotIndex].curItem = curItem;
+                    curItem.name = selectedItem.Name;
+                }
+            }
+            else
+            {
+                if (GUI.Button(new Rect(4.1f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Unequip"))
+                {
+                    Destroy(equipmentSlots[slotIndex].curItem);
+                }
+            }
+
             if (GUI.Button(new Rect(6f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Discard")) //Creates a button to discard items
             {
                 if (equipmentSlots[1].curItem != null && selectedItem.ItemModel.name == equipmentSlots[1].name) //Checks whether or not the item is a peice of armour and is equip
