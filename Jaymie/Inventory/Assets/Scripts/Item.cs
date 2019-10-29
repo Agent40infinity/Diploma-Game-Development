@@ -15,7 +15,7 @@ public class Item
     private ItemType type;
 
     //References:
-    private Texture2D icon;
+    private Sprite icon;
     private GameObject mesh;
     #endregion
 
@@ -68,7 +68,7 @@ public class Item
         set { heal = value; }
     }
 
-    public Texture2D Icon
+    public Sprite Icon
     {
         get { return icon; }
         set { icon = value; }

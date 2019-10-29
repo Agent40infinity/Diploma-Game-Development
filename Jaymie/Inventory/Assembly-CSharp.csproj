@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\InventoryCanvas.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\ItemData.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

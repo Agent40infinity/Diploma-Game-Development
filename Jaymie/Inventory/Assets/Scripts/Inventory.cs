@@ -86,7 +86,7 @@ namespace Linear
                 {
                     GUI.skin = invSkin; //Sets the skin to overlay the GUI
                     GUI.Box(new Rect(4.125f * scrt.x, 0 * scrt.y, 3.5f * scrt.x, 3.5f * scrt.y), ""); //Displays a box behind the Selected Item's Icon
-                    GUI.DrawTexture(new Rect(4.865f * scrt.x, 0.65f * scrt.y, 2 * scrt.x, 2 * scrt.y), selectedItem.Icon); //Displays the Selected Item's Icon
+                    GUI.Box(new Rect(4.865f * scrt.x, 0.65f * scrt.y, 2 * scrt.x, 2 * scrt.y), "x"/*selectedItem.Icon*/); //Displays the Selected Item's Icon
                     GUI.Box(new Rect(4.125f * scrt.x, 3.25f * scrt.y, 3.5f * scrt.x, 0.4f * scrt.y), "Name: " + selectedItem.Name); //Displays the Selected Item's Name
                     GUI.Box(new Rect(4.125f * scrt.x, 3.6f * scrt.y, 3.5f * scrt.x, scrt.y), selectedItem.Description); //Displays the Selected Item's Description
                     GUI.Box(new Rect(4.125f * scrt.x, 4.6f * scrt.y, 3.5f * scrt.x, 0.4f * scrt.y), "Amount: " + selectedItem.Amount); //Displays the Selected Item's Count

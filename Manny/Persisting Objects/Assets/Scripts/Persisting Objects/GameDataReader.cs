@@ -53,4 +53,9 @@ public class GameDataReader : MonoBehaviour
         value.a = reader.ReadSingle();
         return value;
     }
+
+    public Random.State ReadRandomState()
+    {
+        return JsonUtility.FromJson<Random.State>(reader.ReadString());
+    }
 }
