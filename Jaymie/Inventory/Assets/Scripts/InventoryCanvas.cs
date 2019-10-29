@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 namespace Linear
 {
@@ -23,6 +24,8 @@ namespace Linear
         public Transform dropLocation;
         public GameObject inventory;
         public ScrollRect scrollview;
+        public GameObject invButton;
+        public RectTransform content;
         public GameObject selected, selectedIcon, selectedName, selectedDescription, selectedAmount, selectedValue, selectedType, selectedEquip, selectedDiscard;
 
         [System.Serializable]
@@ -34,6 +37,18 @@ namespace Linear
         }
 
         public equipment[] equipmentSlots;
+
+        int GetNumberFromString(string word) //Allows for the trasnlation of strings into integers.
+        {
+            string number = Regex.Match(word, @"\d+").Value;
+
+            int result;
+            if (int.TryParse(number, out result))
+            {
+                return result;
+            }
+            return -1;
+        }
         #endregion
 
         private void Start()
@@ -45,9 +60,17 @@ namespace Linear
 
         private void Update()
         {
+            content.sizeDelta = new Vector2(0, 30 * inv.Count);
+
             if (Input.GetKey(KeyCode.Alpha1))
             {
+                int invStart = inv.Count;
                 CheckForDuplicates();
+                int invFinish = inv.Count;
+                if (invFinish > invStart)
+                {
+                    SpawnButton(invStart);
+                }
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -83,7 +106,6 @@ namespace Linear
                         sortType = sortList[i]; //Sets the type based on the Index
                     }
                 }
-                Display();
 
                 if (selectedItem != null) //Displays the selected Item's information
                 {
@@ -108,77 +130,10 @@ namespace Linear
             }
         }
 
-        public void Display()
+        public void DisplayItem()
         {
-            if (!(sortType == "All" || sortType == ""))
-            {
-                ItemType type = (ItemType)System.Enum.Parse(typeof(ItemType), sortType);
-                int a = 0; //amount
-                int s = 0; //slot
-                for (int i = 0; i < inv.Count; i++)
-                {
-                    if (inv[i].Type == type)
-                    {
-                        a++;
-                    }
-                }
-                if (a <= inventorySize)
-                {
-                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
-                    {
-                        if (inv[i].Type == type)
-                        {
-                            if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
-                            {
-                                selectedItem = inv[i]; //Selects the item if clicked
-                            }
-                        }
-                    }
-                }
-                else //Checks if the page can be scrolled 
-                {
-                    scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scrt.y, 3.75f * scrt.x, 8.5f * scrt.y), scrollPos, new Rect(0, 0, 0, 8.5f * scrt.y + ((inv.Count - inventorySize) * (0.25f * scrt.y))), false, true); //Creates a vertical scroll bar
-
-                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
-                    {
-                        if (inv[i].Type == type)
-                        {
-                            if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
-                            {
-                                selectedItem = inv[i]; //Selects the item if clicked
-                            }
-                        }
-                        s++;
-                    }
-                    GUI.EndScrollView(); //Ends the ability to scroll
-                }
-            }
-            else
-            {
-                if (inv.Count <= inventorySize) //Checks if the page is full
-                {
-                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory
-                    {
-                        if (GUI.Button(new Rect(0.5f * scrt.x, 0.25f * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
-                        {
-                            selectedItem = inv[i]; //Selects the item if clicked
-                        }
-                    }
-                }
-                else //Checks if the page can be scrolled 
-                {
-                    scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scrt.y, 3.75f * scrt.x, 8.5f * scrt.y), scrollPos, new Rect(0, 0, 0, 8.5f * scrt.y + ((inv.Count - inventorySize) * (0.25f * scrt.y))), false, true); //Creates a vertical scroll bar
-
-                    for (int i = 0; i < inv.Count; i++) //for loop to display each item within the inventory outside of the nrmal size
-                    {
-                        if (GUI.Button(new Rect(0.5f * scrt.x, 0 * scrt.y + i * (0.25f * scrt.y), 3 * scrt.x, 0.25f * scrt.y), inv[i].Name)) //Button to display the item name
-                        {
-                            selectedItem = inv[i]; //Selects the item if clicked
-                        }
-                    }
-                    GUI.EndScrollView(); //Ends the ability to scroll
-                }
-            }
+            int index = GetNumberFromString(gameObject.name);
+            selectedItem = inv[index];
         }
 
         public void CheckForDuplicates()
@@ -202,7 +157,7 @@ namespace Linear
                         }
                         else if (j == inv.Count - 1) //Checks if j has reached the last item within the list of items to add so that it can create a new non-duplicate entry
                         {
-                            inv.Add(itemsToAdd[i]); //Adds the new item to the inventory
+                            inv.Add(itemsToAdd[i]); //Adds the new item to the inventory  
                             itemsToAdd[i] = null; //Sets the  item to null to remove it from the list
                             j = inv.Count; //Jumps to the null item to end the for loop
                         }
@@ -215,6 +170,16 @@ namespace Linear
                     itemsToAdd[i] = null; //Sets the item to null to remove it from the list
                 }
             }
+        }
+
+        void SpawnButton(int invS)
+        {
+            for (int i = invS; i < inv.Count; i++)
+            {
+                GameObject item = Instantiate(invButton, content);
+                item.name = (inv[i].Name + " " + i);
+                item.GetComponentInChildren<Text>().text = inv[i].Name;
+            }            
         }
 
         public void ItemUse(ItemType type)
