@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 3986240356410616276}
   - component: {fileID: 7910015343848101193}
   - component: {fileID: 8930223829241710957}
+  - component: {fileID: 4135126233922186945}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4135126233922186945}
         m_MethodName: DisplayItem
         m_Mode: 1
         m_Arguments:
@@ -208,3 +209,37 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &4135126233922186945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692477472282351413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e6e8d9cf482374c95c2603c69d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShown: 0
+  scrt: {x: 0, y: 0}
+  scrollPos: {x: 0, y: 0}
+  money: 0
+  sortType: 
+  sortList: []
+  inventorySize: 34
+  dropLocation: {fileID: 0}
+  inventory: {fileID: 0}
+  scrollview: {fileID: 0}
+  invButton: {fileID: 0}
+  content: {fileID: 0}
+  selected: {fileID: 0}
+  selectedIcon: {fileID: 0}
+  selectedName: {fileID: 0}
+  selectedDescription: {fileID: 0}
+  selectedAmount: {fileID: 0}
+  selectedValue: {fileID: 0}
+  selectedType: {fileID: 0}
+  selectedEquip: {fileID: 0}
+  selectedDiscard: {fileID: 0}
+  equipmentSlots: []
