@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnZone: {fileID: 1183303365}
+  persistentObjects:
+  - {fileID: 1183303365}
 --- !u!1 &690548116
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +305,7 @@ MonoBehaviour:
   - {fileID: 1259243754}
   - {fileID: 690548117}
   - {fileID: 1950336840}
+  sequential: 0
 --- !u!4 &1183303366
 Transform:
   m_ObjectHideFlags: 0
