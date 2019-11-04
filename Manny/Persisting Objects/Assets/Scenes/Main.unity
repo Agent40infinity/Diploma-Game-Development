@@ -921,7 +921,10 @@ MonoBehaviour:
   loadKey: 108
   shapeFactory: {fileID: 11400000, guid: e6ff031a3573f1a498cf1f15c3aa7a4b, type: 2}
   storage: {fileID: 1545961384}
-  spawnZone: {fileID: 0}
+  levelCount: 0
+  reseedOnLoad: 0
+  creationSpeedSlider: {fileID: 156788075}
+  destructionSpeedSlider: {fileID: 1524523437}
 --- !u!4 &1228536783
 Transform:
   m_ObjectHideFlags: 0
