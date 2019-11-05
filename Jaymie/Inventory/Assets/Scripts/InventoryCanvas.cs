@@ -95,7 +95,7 @@ public class InventoryCanvas : MonoBehaviour
             if (selectedItem != null) //Displays the selected Item's information
             {
                 selected.SetActive(true);
-                selectedIcon.GetComponent<Image>().sprite = selectedItem.Icon; //Displays the Selected Item's Icon
+                //selectedIcon.GetComponent<Image>().sprite = selectedItem.Icon; //Displays the Selected Item's Icon
                 selectedName.GetComponentInChildren<Text>().text = selectedItem.Name; //Displays the Selected Item's Name
                 selectedDescription.GetComponentInChildren<Text>().text = selectedItem.Description; //Displays the Selected Item's Description
                 selectedAmount.GetComponentInChildren<Text>().text = selectedItem.Amount.ToString(); //Displays the Selected Item's Count
