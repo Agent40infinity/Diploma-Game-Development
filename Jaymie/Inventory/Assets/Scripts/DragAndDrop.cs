@@ -199,10 +199,6 @@ public class DragAndDrop : MonoBehaviour
         {
             inv.Add(new Item());
         }
-        for (int i = 0; i < 10; i++)
-        {
-            AddItem(i * 100);
-        }
     }
 
     public void Update()

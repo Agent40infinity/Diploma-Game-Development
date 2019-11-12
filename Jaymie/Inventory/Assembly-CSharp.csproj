@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\ItemButton.cs" />
     <Compile Include="Assets\Scripts\ItemData.cs" />
+    <Compile Include="Assets\Scripts\RadialInventory.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
