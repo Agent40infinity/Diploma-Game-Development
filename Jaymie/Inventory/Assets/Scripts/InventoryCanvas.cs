@@ -17,6 +17,10 @@ public class InventoryCanvas : MonoBehaviour
     public string[] sortList;
     public int inventorySize = 34;
 
+    //Slots:
+    public int slotIndex = 0;
+    public ItemType type;
+
     //References:
     public Transform dropLocation;
     public GameObject inventory;
@@ -101,7 +105,7 @@ public class InventoryCanvas : MonoBehaviour
                 selectedAmount.GetComponentInChildren<Text>().text = selectedItem.Amount.ToString(); //Displays the Selected Item's Count
                 selectedValue.GetComponentInChildren<Text>().text = selectedItem.Value.ToString(); //Displays the Selected Item's Value
                 selectedType.GetComponentInChildren<Text>().text = selectedItem.Type.ToString(); //Displays the Selected Item's categorised type
-                ItemUse(selectedItem.Type);
+                DisplayItemUse(selectedItem.Type);
             }
             else
             {
@@ -160,10 +164,10 @@ public class InventoryCanvas : MonoBehaviour
         }
     }
 
-    public void ItemUse(ItemType type)
+    public void DisplayItemUse(ItemType iType)
     {
-        int slotIndex = 0;
-        switch (type)
+        slotIndex = 0;
+        switch (iType)
         {
             case ItemType.Ingrediant:
                 break;
@@ -190,47 +194,54 @@ public class InventoryCanvas : MonoBehaviour
 
         if (equipmentSlots[slotIndex].curItem == null || selectedItem.Name != equipmentSlots[slotIndex].curItem.name)
         {
-            if (GUI.Button(new Rect(4.1f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Equip"))
-            {
-                if (equipmentSlots[slotIndex].curItem != null)
-                {
-                    Destroy(equipmentSlots[slotIndex].curItem);
-                }
-                GameObject curItem = Instantiate(selectedItem.ItemModel, equipmentSlots[slotIndex].location);
-                equipmentSlots[slotIndex].curItem = curItem;
-                curItem.name = selectedItem.Name;
-            }
+            selectedEquip.GetComponentInChildren<Text>().text = "Equip";
         }
         else
         {
-            if (GUI.Button(new Rect(4.1f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Unequip"))
+            selectedEquip.GetComponentInChildren<Text>().text = "Unequip";
+        }
+    }
+
+    public void ItemEquip()
+    {
+        string name = selectedEquip.GetComponentInChildren<Text>().text;
+        if (name == "Equip")
+        {
+            if (equipmentSlots[slotIndex].curItem != null)
             {
                 Destroy(equipmentSlots[slotIndex].curItem);
             }
+            GameObject curItem = Instantiate(selectedItem.ItemModel, equipmentSlots[slotIndex].location);
+            equipmentSlots[slotIndex].curItem = curItem;
+            curItem.name = selectedItem.Name;
         }
-
-        if (GUI.Button(new Rect(6f * scrt.x, 8 * scrt.y, 1.5f * scrt.x, 0.4f * scrt.y), "Discard")) //Creates a button to discard items
+        else if (name == "Unequip")
         {
-            if (equipmentSlots[1].curItem != null && selectedItem.ItemModel.name == equipmentSlots[1].name) //Checks whether or not the item is a peice of armour and is equip
-            {
-                Destroy(equipmentSlots[1].curItem); //Distroys the GameObject attached to the player
-            }
-            if (selectedItem.ItemModel != null)
-            {
-                GameObject droppedItem = Instantiate(selectedItem.ItemModel, dropLocation.position, Quaternion.identity) as GameObject; //Creates and spawns a new GameObject to represent the dropped item\
-                droppedItem.name = selectedItem.Name; //Matches the name of the selectedItem with the name of the new GameObject
-                droppedItem.AddComponent<Rigidbody>().useGravity = true; //Attaches a Rigidbody to the droppedItem GameObject
-                droppedItem.AddComponent<BoxCollider>(); //Attaches a BoxCollider to the droppedItem GameObject
-            }
-            if (selectedItem.Amount != 0) //Checks if there is more than one item of that same type in your inventory
-            {
-                selectedItem.Amount--; //Deducts item's amount
-            }
-            else
-            {
-                inv.Remove(selectedItem); //Removes the item entry completely
-                selectedItem = null; //Sets selectedItem to null
-            }
+            Destroy(equipmentSlots[slotIndex].curItem);
+        }
+    }
+
+    public void ItemDiscard()
+    {
+        if (equipmentSlots[1].curItem != null && selectedItem.ItemModel.name == equipmentSlots[1].name) //Checks whether or not the item is a peice of armour and is equip
+        {
+            Destroy(equipmentSlots[1].curItem); //Distroys the GameObject attached to the player
+        }
+        if (selectedItem.ItemModel != null)
+        {
+            GameObject droppedItem = Instantiate(selectedItem.ItemModel, dropLocation.position, Quaternion.identity) as GameObject; //Creates and spawns a new GameObject to represent the dropped item\
+            droppedItem.name = selectedItem.Name; //Matches the name of the selectedItem with the name of the new GameObject
+            droppedItem.AddComponent<Rigidbody>().useGravity = true; //Attaches a Rigidbody to the droppedItem GameObject
+            droppedItem.AddComponent<BoxCollider>(); //Attaches a BoxCollider to the droppedItem GameObject
+        }
+        if (selectedItem.Amount > 1) //Checks if there is more than one item of that same type in your inventory
+        {
+            selectedItem.Amount--; //Deducts item's amount
+        }
+        else
+        {
+            inv.Remove(selectedItem); //Removes the item entry completely
+            selectedItem = null; //Sets selectedItem to null
         }
     }
 }
