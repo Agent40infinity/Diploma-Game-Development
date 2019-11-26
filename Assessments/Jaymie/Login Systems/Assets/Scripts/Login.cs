@@ -28,6 +28,8 @@ public class Login : MonoBehaviour
     public GameObject checkCode;
     public GameObject newPassword;
     public InputField codeInputForgot;
+    public InputField newPasswordInput;
+    public InputField newConfirmInput;
 
     //Notification:
     public Text notification;
@@ -41,7 +43,7 @@ public class Login : MonoBehaviour
     #endregion
 
     #region Create User
-    IEnumerator CreateUser(string username, string email, string password)
+    IEnumerator CreateUser(string username, string email, string password) //Used to create a new user
     {
         string createUserURL = "http://localhost/nsirpg/InsertUser.php";
         WWWForm form = new WWWForm();
@@ -55,14 +57,14 @@ public class Login : MonoBehaviour
         notification.text = "Account Created";
     }
 
-    public void CreateNewUser()
+    public void CreateNewUser() //Calls upon the co-routine to allow for use via button
     {
         StartCoroutine(CreateUser(usernameInput.text, emailInput.text, passwordInput.text));
     }
     #endregion
 
     #region Login
-    IEnumerator UserLogin(string username, string password)
+    IEnumerator UserLogin(string username, string password) //Used to login the user
     {
         string createUserURL = "http://localhost/nsirpg/UserLogin.php";
         WWWForm form = new WWWForm();
@@ -82,14 +84,14 @@ public class Login : MonoBehaviour
         }
     }
 
-    public void LoginUser()
+    public void LoginUser() //Calls upon the co-routine to allow for use via button
     {
         StartCoroutine(UserLogin(usernameInputLogin.text, passwordInputLogin.text));
     }
     #endregion
 
     #region forgot User
-    IEnumerator ForgotUser(string email)
+    IEnumerator ForgotUser(string email) //Used to register if the user has forgetten their password
     {
         string forgotURL = "http://localhost/nsirpg/checkemail.php";
         WWWForm form = new WWWForm();
@@ -109,14 +111,14 @@ public class Login : MonoBehaviour
         }
     }
 
-    public void SubmitForgotUser()
+    public void SubmitForgotUser() //Calls upon the co-routine to allow for use via button
     {
         StartCoroutine(ForgotUser(emailInputForgot.text));
     }
     #endregion
 
     #region Send Email
-    void SendEmail(string _email)
+    void SendEmail(string _email) //Sends an email to the users email if user exists
     {
         CreateCode();
         MailMessage mail = new MailMessage();
@@ -141,7 +143,7 @@ public class Login : MonoBehaviour
         notification.text = "Email Sent";
     }
 
-    void CreateCode()
+    void CreateCode() //Generates a code that will be used to change the password
     {
         for (int i = 0; i < 20; i++)
         {
@@ -154,7 +156,7 @@ public class Login : MonoBehaviour
     #endregion
 
     #region Reset Password
-    public IEnumerator CheckCode(string _code)
+    public IEnumerator CheckCode(string _code) //Used to check if the code entered matches the one sent via email
     {
         _code = codeInputForgot.text;
         if (savedCode == _code)
@@ -170,13 +172,14 @@ public class Login : MonoBehaviour
         yield return null;
     }
 
-    public void SubmitCodeForReset()
+    public void SubmitCodeForReset() //Calls upon the co-routine to allow for use via button
     {
         StartCoroutine(CheckCode(codeInputForgot.text));
     }
 
-    public IEnumerator PasswordReset(string newPassword, string confirmPassword)
+    public IEnumerator PasswordReset(string newPassword, string confirmPassword) //Used to reset the password once a new password has been entered
     {
+        Debug.Log("Run Function");
         if (newPassword == confirmPassword)
         {
             string passwordResetURL = "http://localhost/nsirpg/UpdatePassword.php";
@@ -187,12 +190,17 @@ public class Login : MonoBehaviour
             UnityWebRequest webRequest = UnityWebRequest.Post(passwordResetURL, form);
             yield return webRequest.SendWebRequest();
             Debug.Log(webRequest.downloadHandler.text);
-            //if (webRequest.downloadHandler.text == "User Not Found")
-            //{
-            //    StartCoroutine("Notification");
-            //    notification.text = webRequest.downloadHandler.text;
-            //}
-         
+
+            if (webRequest.downloadHandler.text == "User Not Found")
+            {
+                StartCoroutine("Notification");
+                notification.text = webRequest.downloadHandler.text;
+            }
+            else if (webRequest.downloadHandler.text == "Password Changed")
+            {
+                StartCoroutine("Notification");
+                notification.text = webRequest.downloadHandler.text;
+            }
         }
         else
         {
@@ -202,14 +210,14 @@ public class Login : MonoBehaviour
         yield return null;
     }
 
-    public void SubmitPasswordReset()
+    public void SubmitPasswordReset() //Calls upon the co-routine to allow for use via button
     {
-        StartCoroutine(PasswordReset(null, null));
+        StartCoroutine(PasswordReset(newPasswordInput.text, newConfirmInput.text));
     }
     #endregion
 
     #region Notification
-    public IEnumerator Notification()
+    public IEnumerator Notification() //Used to set active the notification shystem
     {
         notificationParent.SetActive(true);
         yield return new WaitForSeconds(2f);

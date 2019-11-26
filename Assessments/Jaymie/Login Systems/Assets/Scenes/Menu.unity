@@ -5184,12 +5184,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -5260,6 +5260,8 @@ MonoBehaviour:
   checkCode: {fileID: 211912770}
   newPassword: {fileID: 581712421}
   codeInputForgot: {fileID: 1702470063}
+  newPasswordInput: {fileID: 278486265}
+  newConfirmInput: {fileID: 582027294}
   notification: {fileID: 1006612000}
   notificationParent: {fileID: 1485870313}
   _username: 
@@ -6286,7 +6288,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1301676655}
-        m_MethodName: SubmitCodeForReset
+        m_MethodName: SubmitPasswordReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
