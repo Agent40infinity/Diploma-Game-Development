@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventoryCanvas : MonoBehaviour
 {
@@ -84,17 +85,7 @@ public class InventoryCanvas : MonoBehaviour
     {
         if (isShown)
         {
-            scrt.x = Screen.width / 16;
-            scrt.y = Screen.height / 9;
-
             inventory.SetActive(true); //Background
-            for (int i = 0; i < sortList.Length; i++) //For each type within Item
-            {
-                if (GUI.Button(new Rect((i + 4.25f) * scrt.x, 0, scrt.x, 0.25f * scrt.y), sortList[i])) //Creates a button bsaed on the Item Type
-                {
-                    sortType = sortList[i]; //Sets the type based on the Index
-                }
-            }
 
             if (selectedItem != null) //Displays the selected Item's information
             {
@@ -219,9 +210,9 @@ public class InventoryCanvas : MonoBehaviour
         {
             Destroy(equipmentSlots[slotIndex].curItem);
         }
-    }
+  }
 
-    public void ItemDiscard()
+  public void ItemDiscard()
     {
         if (equipmentSlots[1].curItem != null && selectedItem.ItemModel.name == equipmentSlots[1].name) //Checks whether or not the item is a peice of armour and is equip
         {
@@ -242,6 +233,36 @@ public class InventoryCanvas : MonoBehaviour
         {
             inv.Remove(selectedItem); //Removes the item entry completely
             selectedItem = null; //Sets selectedItem to null
+        }
+    }
+
+    public void SortItem()
+    {
+        string name = EventSystem.current.currentSelectedGameObject.name;
+        ItemType type = (ItemType)System.Enum.Parse(typeof(ItemType), name);
+        Debug.Log(type);
+        GameObject[] entry = GameObject.FindGameObjectsWithTag("Item");
+        if (type != ItemType.All)
+        {
+            Debug.Log("Some");
+            for (int i = 0; i < inv.Count; i++)
+            {
+                if (inv[i].Type != type)
+                {
+                    Debug.Log("off");
+
+                    entry[i].gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < inv.Count; i++)
+            {
+                Debug.Log("all");
+
+                entry[i].gameObject.SetActive(true);
+            }
         }
     }
 }
