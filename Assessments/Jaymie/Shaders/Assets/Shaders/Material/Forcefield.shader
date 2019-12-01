@@ -1,4 +1,4 @@
-﻿Shader "Kaima/Depth/ForceField"
+﻿Shader "Custom/Forcefield"
 {
 	Properties
 	{

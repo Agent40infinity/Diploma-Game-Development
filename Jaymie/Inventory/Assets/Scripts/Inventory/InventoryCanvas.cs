@@ -11,6 +11,7 @@ public class InventoryCanvas : MonoBehaviour
     public List<Item> inv = new List<Item>();
     public Item selectedItem;
     public bool isShown;
+    public bool isInv = true;
     public Vector2 scrt;
     public Vector2 scrollPos;
     public int money;
@@ -18,13 +19,15 @@ public class InventoryCanvas : MonoBehaviour
     public string[] sortList;
     public int inventorySize = 34;
 
+    public static string loggedInUsername = "";
+
     //Slots:
     public int slotIndex = 0;
     public ItemType type;
 
     //References:
     public Transform dropLocation;
-    public GameObject inventory;
+    public GameObject inventory, character, menu;
     public ScrollRect scrollview;
     public GameObject invButton;
     public RectTransform content;
@@ -81,11 +84,27 @@ public class InventoryCanvas : MonoBehaviour
         }
     }
 
+    public void invSwitch(bool toggle)
+    {
+        isInv = toggle;
+        if (isInv)
+        {
+            inventory.SetActive(true); //Background
+            character.SetActive(false); //Character
+        }
+        else
+        {
+            inventory.SetActive(false); //Background
+            character.SetActive(true); //Character
+        }
+        menu.SetActive(true);
+    }
+
     private void OnGUI()
     {
         if (isShown)
         {
-            inventory.SetActive(true); //Background
+            invSwitch(isInv);
 
             if (selectedItem != null) //Displays the selected Item's information
             {
@@ -106,6 +125,8 @@ public class InventoryCanvas : MonoBehaviour
         else
         {
             inventory.SetActive(false);
+            character.SetActive(false);
+            menu.SetActive(false);
         }
     }
 
