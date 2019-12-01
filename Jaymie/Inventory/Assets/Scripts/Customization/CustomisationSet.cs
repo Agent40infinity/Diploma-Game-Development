@@ -42,6 +42,7 @@ public class CustomisationSet : MonoBehaviour
     public GameObject[] increaseStats = new GameObject[6];
     public GameObject inputName;
     public GameObject player, warrior;
+    public DataToSend dataToSend;
     #endregion
 
     #region General
@@ -228,14 +229,13 @@ public class CustomisationSet : MonoBehaviour
     #endregion
 
     #region Save
-    void Save()
+    public void Save()
     {
         for (int i = 0; i < stats.Length; i++)
         {
             stats[i] += tempStats[i];
         }
-        //GameObject player = GameObject.FindWithTag("Player");
-        //player.GetComponent<PlayerManager>().SavePlayer();
+        StartCoroutine(dataToSend.SendData());
     }
     #endregion
 

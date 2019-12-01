@@ -8618,6 +8618,7 @@ MonoBehaviour:
   inputName: {fileID: 5410964965407238468}
   player: {fileID: 5410964965672865356}
   warrior: {fileID: 5410964965672865356}
+  dataToSend: {fileID: 0}
 --- !u!114 &5410964965103480122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9209,7 +9210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5410964965103480120}
-        m_MethodName: SaveSettings
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
