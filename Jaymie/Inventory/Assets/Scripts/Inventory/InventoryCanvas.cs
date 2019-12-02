@@ -18,6 +18,7 @@ public class InventoryCanvas : MonoBehaviour
     public string sortType = "";
     public string[] sortList;
     public int inventorySize = 34;
+    public bool setupName = false;
 
     public static string loggedInUsername = "";
 
@@ -32,6 +33,7 @@ public class InventoryCanvas : MonoBehaviour
     public GameObject invButton;
     public RectTransform content;
     public GameObject selected, selectedIcon, selectedName, selectedDescription, selectedAmount, selectedValue, selectedType, selectedEquip, selectedDiscard;
+    public GameObject inputName;
 
     [System.Serializable]
     public struct equipment
@@ -96,6 +98,12 @@ public class InventoryCanvas : MonoBehaviour
         {
             inventory.SetActive(false); //Background
             character.SetActive(true); //Character
+            if (setupName == false)
+            {
+                inputName.GetComponent<InputField>().text = CustomisationSet.characterName;
+                setupName = true;
+            }
+
         }
         menu.SetActive(true);
     }

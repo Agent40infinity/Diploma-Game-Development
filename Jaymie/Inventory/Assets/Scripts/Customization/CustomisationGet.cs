@@ -2,32 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 //you will need to change Scenes
-public class CustomisationGet : MonoBehaviour {
+public class CustomisationGet : MonoBehaviour 
+{
 
     [Header("Character")]
-    public Renderer character;
+    public static Renderer character;
     public bool setNeeded = true;
 
     #region Start
     public void Start()
     {
         character = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<SkinnedMeshRenderer>();
-        LoadTexture();
     }
     #endregion
 
     #region LoadTexture Function
-    void LoadTexture()
-    {
-        if (setNeeded == true)
-        {
-            //SetTexture();
-        }
-    }
+  
     #endregion
     #region SetTexture
-    void SetTexture(string type, int index)
+    public static void SetTexture(string type, int index)
     {
+        character = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<SkinnedMeshRenderer>();
         Texture2D tex = null;
         int matIndex = 0;
         switch(type)

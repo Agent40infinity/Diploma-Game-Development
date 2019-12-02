@@ -24,7 +24,8 @@ public class CustomisationSet : MonoBehaviour
     public int skinMax;
     public int eyesMax, mouthMax, hairMax, clothesMax, armourMax;
     [Header("Character Name")]
-    public static string characterName = "Adventurer";
+    public static string characterName;
+    public static string tempCharacterName;
     [Header("Stats")]
     public CharacterClass charClass;
     public CharacterRace charRace;
@@ -102,7 +103,7 @@ public class CustomisationSet : MonoBehaviour
         Debug.Log("Character Name:" + characterName);
         classText.GetComponent<Text>().text = selectedClass[selectedIndex];
         pointText.GetComponent<Text>().text = "Points: " + points;
-        characterName = inputName.GetComponent<InputField>().text;
+        tempCharacterName = inputName.GetComponent<InputField>().text;
         str.GetComponent<Text>().text = "Strength: " + (stats[0] + tempStats[0]);
         dex.GetComponent<Text>().text = "Dexterity: " + (stats[1] + tempStats[1]);
         cont.GetComponent<Text>().text = "Constitution: " + (stats[2] + tempStats[2]);
@@ -235,7 +236,6 @@ public class CustomisationSet : MonoBehaviour
         {
             stats[i] += tempStats[i];
         }
-        StartCoroutine(dataToSend.SendData());
     }
     #endregion
 
