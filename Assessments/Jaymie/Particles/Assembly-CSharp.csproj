@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CE9B2838-BAA5-58C9-FABF-B8A8DCBCAB94}</ProjectGuid>
+    <ProjectGuid>{A2833E20-0550-03E0-8CA5-3DD8FB6C6E27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,33 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Customization\CustomisationGet.cs" />
-    <Compile Include="Assets\Scripts\Customization\CustomisationSet.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Inventory\DragAndDrop.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Inventory\InventoryCanvas.cs" />
-    <Compile Include="Assets\Scripts\Inventory\RadialInventory.cs" />
-    <Compile Include="Assets\Scripts\Item.cs" />
-    <Compile Include="Assets\Scripts\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\ItemData.cs" />
-    <Compile Include="Assets\Scripts\Login\Login.cs" />
-    <Compile Include="Assets\Scripts\Login\UI.cs" />
-    <Compile Include="Assets\Scripts\Saving\DataToSend.cs" />
+    <Compile Include="Assets\Scripts\ParticleController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -293,13 +281,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Jaymie/Inventory/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Aiden.Nathan1/Documents/GitHub/Diploma-Game-Development/Assessments/Jaymie/Particles/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
