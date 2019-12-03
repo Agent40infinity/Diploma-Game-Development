@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    [Range(0, 4)]
+    [Range(0, 9)]
     public int selectedParticle = 0;
     public int tempIndex;
     public bool particleSpawned = false;
     public GameObject[] particles;
     public GameObject Stand;
+
+    public int zoomIndex = 1;
+    public Transform[] zoom;
+    public float zoomSpeed = 5;
 
     public void Start()
     {
@@ -19,21 +23,40 @@ public class ParticleController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             selectedParticle++;
-            if (selectedParticle > 5)
+            if (selectedParticle > particles.Length - 1)
             {
                 selectedParticle = 0;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedParticle--;
             if (selectedParticle < 0)
             {
-                selectedParticle = 5;
+                selectedParticle = particles.Length - 1;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            zoomIndex++;
+            if (zoomIndex > zoom.Length - 1)
+            {
+                zoomIndex = 0;
+            }
+            Zoom();
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            zoomIndex--;
+            if (zoomIndex < 0)
+            {
+                zoomIndex = zoom.Length - 1;
+            }
+            Zoom();
         }
 
         if (selectedParticle != tempIndex)
@@ -59,5 +82,10 @@ public class ParticleController : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Particle"));
         Instantiate(particles[selectedParticle], Stand.transform);
         particleSpawned = true;
+    }
+
+    public void Zoom()
+    {
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, zoom[zoomIndex].position, zoomSpeed);
     }
 }
