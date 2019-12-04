@@ -47,7 +47,6 @@ public class ParticleController : MonoBehaviour
             {
                 zoomIndex = 0;
             }
-            Zoom();
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -56,7 +55,6 @@ public class ParticleController : MonoBehaviour
             {
                 zoomIndex = zoom.Length - 1;
             }
-            Zoom();
         }
 
         if (selectedParticle != tempIndex)
@@ -68,6 +66,8 @@ public class ParticleController : MonoBehaviour
         {
             particleSwitch();
         }
+
+        Zoom();
     }
 
     public void ParticleReset()
@@ -86,6 +86,6 @@ public class ParticleController : MonoBehaviour
 
     public void Zoom()
     {
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, zoom[zoomIndex].position, zoomSpeed);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, zoom[zoomIndex].position, zoomSpeed * Time.deltaTime);
     }
 }
