@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 12; //speed applied to jumping.
     public float speed = 10; //speed applied for default movement.
     public float sprintSpeed = 15; //speed applied when sprinting.
-    public float gravity = 20; //default return value for gravity.
+    public float gravity = 20; //default return va/ssv  lue for gravity.
     public float appliedGravity; //gravity used to affect the player.
     public float gravityIncreaseTimer; //Timer used to increase appliedGravity's effect over time.
     public int teleportPoint = -5; //Value used to check if the player is below a certain point so that they can be teleported.
@@ -44,11 +44,19 @@ public class Player : MonoBehaviour
     public float maxY = 65; //Min value for the rotation on the Y axis for the camera.
     public float rotationY = 0; //value to store the Y axis for the rotation.
 
+    //Health Management:
+    public int curHealth; //Current health of the player.
+    public int maxHealth = 100; //Max health of the player.
+    public bool playerDead = false; //Checks whether or not the player is dead.
+    public bool canTakeDamage = true; //Checks whether or not the player can be damaged.
+
     //References:
     private CharacterController controller; //Reference for the attached character controller.
     public GameObject camera; //Reference for the attached camera.
     public LayerMask ground; //Reference for the LayerMask that stores the value for ground.
     public Vector3 spawnPoint = new Vector3(0, 1, 0); //Transform used to store the spawn point.
+    public Joystick joystickMovement;
+    public Joystick joystickAttack;
 
     public bool isGrounded() //Used to determine if the player is grounded based on a collider check.
     {
@@ -70,6 +78,8 @@ public class Player : MonoBehaviour
         canMove = true;
         controller = gameObject.GetComponent<CharacterController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        joystickMovement = GameObject.FindGameObjectWithTag("Movement").GetComponent<Joystick>();
+        joystickAttack = GameObject.FindGameObjectWithTag("Attack").GetComponent<Joystick>();
     }
 
     public void Update() //Used to make reference to the sub-routines/methods.
@@ -91,12 +101,10 @@ public class Player : MonoBehaviour
     {
         if (freezeMove == false) //Checks if the player movement is frozen.
         {
-            moveDirection.z = Input.GetAxis("Vertical"); 
-            moveDirection.x = Input.GetAxis("Horizontal");
+            moveDirection = new Vector3(joystickMovement.Horizontal, 0, joystickMovement.Vertical);
             moveDirection = transform.TransformDirection(moveDirection);
             if (isGrounded()) //Checks if the player is Grounded and applies all Y axis based movement.
             {
-                moveDirection.y = 0;
                 gravityIncreaseTimer = 0;
                 appliedGravity = gravity;
             }
@@ -106,20 +114,12 @@ public class Player : MonoBehaviour
                 if (gravityIncreaseTimer >= 0.4f && appliedGravity <= 50)
                 {
                     appliedGravity = gravity + (gravityIncreaseTimer * 16f);
-                    //Debug.Log(appliedGravity);
+
                 }
             }
-            if (Input.GetKey(KeyCode.LeftShift)) //Checks if the player is sprinting and applies extra force.
-            {
-                moveDirection.x *= sprintSpeed;
-                moveDirection.z *= sprintSpeed;
-            }
-            else //Applies default speed if not sprinting.
-            {
-                moveDirection.x *= speed;
-                moveDirection.z *= speed;
-            }
 
+            moveDirection.x *= speed;
+            moveDirection.z *= speed;
             moveDirection.y -= appliedGravity * Time.deltaTime; //Applies gravity.
             controller.Move(moveDirection * Time.deltaTime); //Applies movement.
         }
@@ -131,8 +131,8 @@ public class Player : MonoBehaviour
     {
         if (freezeCamera == false) //Checks if the camera has been frozen.
         {
-            transform.Rotate(0, Input.GetAxis("Mouse X") * sensX, 0); //Records and applies movement for X axis.
-            rotationY += Input.GetAxis("Mouse Y") * sensY; //Records movement for Y axis.
+            transform.Rotate(0, joystickAttack.Horizontal * sensX, 0); //Records and applies movement for X axis.
+            rotationY += joystickAttack.Vertical * sensY; //Records movement for Y axis.
             rotationY = Mathf.Clamp(rotationY, minY, maxY); //Applies a Clamp to give boundaries to the movement on the Y axis.
             camera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0); //applies movement for the Y axis.
         }
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && canFire)
         {
             GameObject bullet = Resources.Load<GameObject>("Prefabs/Bullet");
-            Instantiate(bullet, transform.position, Quaternion.identity);   
+            Instantiate(bullet, transform.position, bullet.transform.rotation);   
             Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
             bulletRigid.AddForce(Vector3.forward * speed, ForceMode.Impulse);
             Debug.Log("Bullet: " + bulletRigid + " force: " + bulletRigid.velocity);
@@ -172,6 +172,29 @@ public class Player : MonoBehaviour
             canFire = false;
             fireCooldown -= Time.deltaTime;
         }
+    }
+    #endregion
+
+    #region Health Management
+    public void TakeDamage(int damageDealt) //Function that can be called upon to deal damage to the player.
+    {
+        if (canTakeDamage) //Checks whether or not the player has an iFrame and takes away damage if they don't.
+        {
+            curHealth -= damageDealt;
+            if (curHealth <= 0) //Checks whether or not the player has 0 health to allow the player to go down.
+            {
+                playerDead = true;
+                canTakeDamage = false;
+            }
+            StartCoroutine(iFrame());
+        }
+    }
+
+    public IEnumerator iFrame() //Co-routine that's used as a timer to check whether or not the player can take damage.
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(0.3f);
+        canTakeDamage = true;
     }
     #endregion
 
