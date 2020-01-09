@@ -97,6 +97,7 @@ public class Graphs : MonoBehaviour
 
     static Vector3 Torus(float u, float v, float t) //Used to determine the values for the position of each instantiated object to create a torus like shape. Any shape takes the form of a Torus.
     {
+        Debug.Log(u + " " + v + " " + t);
         Vector3 p;
         float r1 = 0.65f + Mathf.Sin(pi * (6f * u + t)) * 0.1f;
         float r2 = 0.2f + Mathf.Sin(pi * (4f * v + t)) * 0.05f;
